@@ -2,7 +2,7 @@ Name
     IPC::SRLock - Set/reset locking semantics to single thread processes
 
 Version
-    0.1.$Revision: 23 $
+    0.1.$Revision: 27 $
 
 Synopsis
        use IPC::SRLock;
@@ -133,7 +133,12 @@ Dependencies
     XML::Simple
 
 Incompatibilities
-    There are no known incompatibilities in this module
+    Testing of the sysv subclass is skiped on: cygwin, freebsd, netbsd and
+    solaris because CPAN testing on these platforms fails
+
+    Testing of the memcached subclass is skipped on all platforms as it
+    requires "memcached" to be listening on the localhost's default
+    memcached port
 
 Bugs and Limitations
     There are no known bugs in this module. Please report problems to the

@@ -1,10 +1,11 @@
 package IPC::SRLock::Fcntl;
 
-# @(#)$Id: Fcntl.pm 21 2008-04-14 21:55:30Z pjf $
+# @(#)$Id: Fcntl.pm 26 2008-04-17 00:14:22Z pjf $
 
 use strict;
 use warnings;
 use base qw(IPC::SRLock);
+use File::Spec;
 use File::Spec::Functions;
 use Fcntl qw(:flock);
 use IO::AtomicFile;
@@ -13,12 +14,12 @@ use Readonly;
 use Time::HiRes qw(usleep);
 use XML::Simple;
 
-use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 21 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 26 $ =~ /\d+/gmx );
 
 Readonly my %ATTRS => ( lockfile  => undef,
                         mode      => oct q(0666),
                         shmfile   => undef,
-                        tempdir   => q(/tmp),
+                        tempdir   => File::Spec->tmpdir,
                         umask     => 0, );
 
 __PACKAGE__->mk_accessors( keys %ATTRS );

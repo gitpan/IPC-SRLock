@@ -1,6 +1,6 @@
 package IPC::SRLock;
 
-# @(#)$Id: SRLock.pm 23 2008-04-15 11:37:28Z pjf $
+# @(#)$Id: SRLock.pm 27 2008-04-25 22:16:37Z pjf $
 
 use strict;
 use warnings;
@@ -14,7 +14,7 @@ use NEXT;
 use Time::Elapsed qw(elapsed);
 use Readonly;
 
-use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 23 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 27 $ =~ /\d+/gmx );
 
 Readonly my %ATTRS =>
    ( debug     => 0,
@@ -202,7 +202,7 @@ IPC::SRLock - Set/reset locking semantics to single thread processes
 
 =head1 Version
 
-0.1.$Revision: 23 $
+0.1.$Revision: 27 $
 
 =head1 Synopsis
 
@@ -389,7 +389,12 @@ None
 
 =head1 Incompatibilities
 
-There are no known incompatibilities in this module
+Testing of the B<sysv> subclass is skiped on: cygwin, freebsd, netbsd
+and solaris because CPAN testing on these platforms fails
+
+Testing of the B<memcached> subclass is skipped on all platforms as it
+requires C<memcached> to be listening on the localhost's default
+memcached port
 
 =head1 Bugs and Limitations
 
