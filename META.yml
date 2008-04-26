@@ -1,6 +1,6 @@
 ---
 name: IPC-SRLock
-version: 0.1.27
+version: 0.1.30
 author:
   - 'Peter Flanigan, C<< <Support at RoxSoft.co.uk> >>'
 abstract: Set/reset locking semantics to single thread processes
@@ -27,7 +27,7 @@ requires:
 provides:
   IPC::SRLock:
     file: lib/IPC/SRLock.pm
-    version: 0.1.27
+    version: 0.1.30
   IPC::SRLock::ExceptionClass:
     file: lib/IPC/SRLock/ExceptionClass.pm
     version: 0.1.23
