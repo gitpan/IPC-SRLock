@@ -1,6 +1,6 @@
 package IPC::SRLock;
 
-# @(#)$Id: SRLock.pm 30 2008-04-26 16:33:33Z pjf $
+# @(#)$Id: SRLock.pm 34 2008-04-27 23:28:57Z pjf $
 
 use strict;
 use warnings;
@@ -14,7 +14,7 @@ use NEXT;
 use Time::Elapsed qw(elapsed);
 use Readonly;
 
-use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 30 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 34 $ =~ /\d+/gmx );
 
 Readonly my %ATTRS =>
    ( debug     => 0,
@@ -202,7 +202,7 @@ IPC::SRLock - Set/reset locking semantics to single thread processes
 
 =head1 Version
 
-0.1.$Revision: 30 $
+0.1.$Revision: 34 $
 
 =head1 Synopsis
 
@@ -398,6 +398,9 @@ memcached port
 
 Automated testing of B<sysv> has been stopped because the testing
 platforms produce inconsistant results
+
+Reduced testing further due to inconsistant CPAN testing results. Last try
+after this will just exit 0 if $ENV{AUTOMATED_TESTING}
 
 =head1 Bugs and Limitations
 

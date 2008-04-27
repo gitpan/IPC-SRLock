@@ -2,7 +2,7 @@ Name
     IPC::SRLock - Set/reset locking semantics to single thread processes
 
 Version
-    0.1.$Revision: 30 $
+    0.1.$Revision: 34 $
 
 Synopsis
        use IPC::SRLock;
@@ -142,6 +142,9 @@ Incompatibilities
 
     Automated testing of sysv has been stopped because the testing platforms
     produce inconsistant results
+
+    Reduced testing further due to inconsistant CPAN testing results. Last
+    try after this will just exit 0 if $ENV{AUTOMATED_TESTING}
 
 Bugs and Limitations
     There are no known bugs in this module. Please report problems to the
