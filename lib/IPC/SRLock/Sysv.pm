@@ -1,6 +1,6 @@
 package IPC::SRLock::Sysv;
 
-# @(#)$Id: Sysv.pm 22 2008-04-15 11:22:49Z pjf $
+# @(#)$Id: Sysv.pm 39 2008-04-28 11:47:55Z pjf $
 
 use strict;
 use warnings;
@@ -9,7 +9,7 @@ use IPC::SysV qw(IPC_CREAT);
 use Readonly;
 use Time::HiRes qw(usleep);
 
-use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 22 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 39 $ =~ /\d+/gmx );
 
 Readonly my %ATTRS => ( lockfile  => 195_911_405,
                         mode      => oct q(0666),
@@ -153,7 +153,7 @@ sub _set {
             shmwrite $shmid, $rec, $me->size * $lock_no, $me->size
                unless ($lock_set);
             shmwrite $shmid, q(EOF,), $me->size * ($lock_no + 1), $me->size;
-            $me->log->debug( $rec ) if ($me->debug);
+            $me->log->debug( 'Set lock '.$rec."\n" ) if ($me->debug);
             $lock_set = 1;
             last;
          }

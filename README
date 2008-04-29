@@ -2,7 +2,7 @@ Name
     IPC::SRLock - Set/reset locking semantics to single thread processes
 
 Version
-    0.1.$Revision: 34 $
+    0.1.$Revision: 40 $
 
 Synopsis
        use IPC::SRLock;
@@ -126,27 +126,22 @@ Dependencies
     IO::File
     IPC::SRLock::ExceptionClass
     IPC::SysV
-    NEXT
     Readonly
     Time::Elapsed
     Time::HiRes
     XML::Simple
 
 Incompatibilities
-    Testing of the sysv subclass is skiped on: cygwin, freebsd, netbsd and
-    solaris because CPAN testing on these platforms fails
+    The sysv subclass will not work on cygwin
 
+Bugs and Limitations
     Testing of the memcached subclass is skipped on all platforms as it
     requires "memcached" to be listening on the localhost's default
     memcached port
 
-    Automated testing of sysv has been stopped because the testing platforms
-    produce inconsistant results
+    Automated testing has been disabled due to inconsistancies in the CPAN
+    testing platforms. See spurious results on previous releases
 
-    Reduced testing further due to inconsistant CPAN testing results. Last
-    try after this will just exit 0 if $ENV{AUTOMATED_TESTING}
-
-Bugs and Limitations
     There are no known bugs in this module. Please report problems to the
     address below. Patches are welcome
 
@@ -154,7 +149,7 @@ Author
     Peter Flanigan, "<Support at RoxSoft.co.uk>"
 
 License and Copyright
-    Copyright (c) 2008 Peter Flanigan. All rights reserved.
+    Copyright (c) 2008 Peter Flanigan. All rights reserved
 
     This program is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself. See perlartistic

@@ -16,7 +16,6 @@ WriteMakefile
                            'IO::File' => '1.14',
                            'IPC::SysV' => '1.04',
                            'List::Util' => '1.19',
-                           'NEXT' => '0.60',
                            'Readonly' => '1.03',
                            'Time::Elapsed' => '0.10',
                            'Time::HiRes' => '1.9711',

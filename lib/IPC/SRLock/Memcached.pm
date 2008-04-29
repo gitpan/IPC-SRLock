@@ -1,6 +1,6 @@
 package IPC::SRLock::Memcached;
 
-# @(#)$Id: Memcached.pm 22 2008-04-15 11:22:49Z pjf $
+# @(#)$Id: Memcached.pm 39 2008-04-28 11:47:55Z pjf $
 
 use strict;
 use warnings;
@@ -9,7 +9,7 @@ use Cache::Memcached;
 use Readonly;
 use Time::HiRes qw(usleep);
 
-use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 22 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 39 $ =~ /\d+/gmx );
 
 Readonly my %ATTRS => ( lockfile  => q(_lockfile),
                         memd      => undef,
@@ -105,7 +105,9 @@ sub _set {
             }
          }
          else {
-            $recs->{ $key } = $pid.q(,).$now.q(,).$timeout;;
+            $recs->{ $key } = $pid.q(,).$now.q(,).$timeout;
+            $text = 'Set lock '.$key.q(,).$recs->{ $key }."\n";
+            $me->log->debug( $text ) if ($me->debug);
             $me->memd->set( $me->shmfile, $recs );
             $lock_set = 1;
          }

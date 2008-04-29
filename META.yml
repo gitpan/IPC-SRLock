@@ -1,6 +1,6 @@
 ---
 name: IPC-SRLock
-version: 0.1.34
+version: 0.1.40
 author:
   - 'Peter Flanigan, C<< <Support at RoxSoft.co.uk> >>'
 abstract: Set/reset locking semantics to single thread processes
@@ -18,7 +18,6 @@ requires:
   IO::File: 1.14
   IPC::SysV: 1.04
   List::Util: 1.19
-  NEXT: 0.60
   Readonly: 1.03
   Time::Elapsed: 0.10
   Time::HiRes: 1.9711
@@ -27,19 +26,19 @@ requires:
 provides:
   IPC::SRLock:
     file: lib/IPC/SRLock.pm
-    version: 0.1.34
+    version: 0.1.40
   IPC::SRLock::ExceptionClass:
     file: lib/IPC/SRLock/ExceptionClass.pm
     version: 0.1.23
   IPC::SRLock::Fcntl:
     file: lib/IPC/SRLock/Fcntl.pm
-    version: 0.1.26
+    version: 0.1.39
   IPC::SRLock::Memcached:
     file: lib/IPC/SRLock/Memcached.pm
-    version: 0.1.22
+    version: 0.1.39
   IPC::SRLock::Sysv:
     file: lib/IPC/SRLock/Sysv.pm
-    version: 0.1.22
+    version: 0.1.39
 generated_by: Module::Build version 0.2808
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html

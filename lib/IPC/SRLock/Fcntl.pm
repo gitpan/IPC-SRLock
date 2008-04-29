@@ -1,6 +1,6 @@
 package IPC::SRLock::Fcntl;
 
-# @(#)$Id: Fcntl.pm 26 2008-04-17 00:14:22Z pjf $
+# @(#)$Id: Fcntl.pm 39 2008-04-28 11:47:55Z pjf $
 
 use strict;
 use warnings;
@@ -14,7 +14,7 @@ use Readonly;
 use Time::HiRes qw(usleep);
 use XML::Simple;
 
-use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 26 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 39 $ =~ /\d+/gmx );
 
 Readonly my %ATTRS => ( lockfile  => undef,
                         mode      => oct q(0666),
@@ -104,7 +104,7 @@ sub _reset {
 
 sub _set {
    my ($me, $key, $pid, $timeout) = @_;
-   my ($lock, $lock_file, $lock_ref, $now, $start, $table);
+   my ($lock, $lock_file, $lock_ref, $now, $start, $table, $text);
 
    $table = {}; $start = time;
 
@@ -137,8 +137,9 @@ sub _set {
    $table->{lock}->{ $key } = { spid    => $pid,
                                 stime   => $now,
                                 timeout => $timeout };
-   $me->log->debug( join q(,), $key, $pid, $now, $timeout ) if ($me->debug);
    $me->_write_shmfile( $lock_file, $table );
+   $text = join q(,), $key, $pid, $now, $timeout;
+   $me->log->debug( 'Set lock '.$text."\n" ) if ($me->debug);
    return 1;
 }
 

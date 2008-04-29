@@ -1,6 +1,6 @@
 package IPC::SRLock;
 
-# @(#)$Id: SRLock.pm 34 2008-04-27 23:28:57Z pjf $
+# @(#)$Id: SRLock.pm 40 2008-04-29 17:18:39Z pjf $
 
 use strict;
 use warnings;
@@ -10,11 +10,10 @@ use Class::Null;
 use Date::Format;
 use English qw(-no_match_vars);
 use IPC::SRLock::ExceptionClass;
-use NEXT;
 use Time::Elapsed qw(elapsed);
 use Readonly;
 
-use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 34 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 40 $ =~ /\d+/gmx );
 
 Readonly my %ATTRS =>
    ( debug     => 0,
@@ -130,7 +129,7 @@ sub timeout_error {
 
    $text  = 'Timed out '.$key.' set by '.$pid;
    $text .= ' on '.time2str( q(%Y-%m-%d at %H:%M), $when );
-   $text .= ' after '.$after.' seconds';
+   $text .= ' after '.$after.' seconds'."\n";
    return $text;
 }
 
@@ -202,7 +201,7 @@ IPC::SRLock - Set/reset locking semantics to single thread processes
 
 =head1 Version
 
-0.1.$Revision: 34 $
+0.1.$Revision: 40 $
 
 =head1 Synopsis
 
@@ -375,8 +374,6 @@ None
 
 =item L<IPC::SysV>
 
-=item L<NEXT>
-
 =item L<Readonly>
 
 =item L<Time::Elapsed>
@@ -389,20 +386,16 @@ None
 
 =head1 Incompatibilities
 
-Testing of the B<sysv> subclass is skiped on: cygwin, freebsd, netbsd
-and solaris because CPAN testing on these platforms fails
+The B<sysv> subclass will not work on cygwin
+
+=head1 Bugs and Limitations
 
 Testing of the B<memcached> subclass is skipped on all platforms as it
 requires C<memcached> to be listening on the localhost's default
 memcached port
 
-Automated testing of B<sysv> has been stopped because the testing
-platforms produce inconsistant results
-
-Reduced testing further due to inconsistant CPAN testing results. Last try
-after this will just exit 0 if $ENV{AUTOMATED_TESTING}
-
-=head1 Bugs and Limitations
+Automated testing has been disabled due to inconsistancies in the CPAN
+testing platforms. See spurious results on previous releases
 
 There are no known bugs in this module.
 Please report problems to the address below.
@@ -414,7 +407,7 @@ Peter Flanigan, C<< <Support at RoxSoft.co.uk> >>
 
 =head1 License and Copyright
 
-Copyright (c) 2008 Peter Flanigan. All rights reserved.
+Copyright (c) 2008 Peter Flanigan. All rights reserved
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself. See L<perlartistic>
