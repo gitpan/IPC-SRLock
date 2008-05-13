@@ -19,7 +19,8 @@ WriteMakefile
                            'Readonly' => '1.03',
                            'Time::Elapsed' => '0.10',
                            'Time::HiRes' => '1.9711',
-                           'XML::Simple' => '2.14'
+                           'XML::Simple' => '2.14',
+                           'version' => '0.74'
                          },
           'INSTALLDIRS' => 'site',
           'EXE_FILES' => [],

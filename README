@@ -2,7 +2,7 @@ Name
     IPC::SRLock - Set/reset locking semantics to single thread processes
 
 Version
-    0.1.$Revision: 40 $
+    0.1.$Revision: 45 $
 
 Synopsis
        use IPC::SRLock;
@@ -137,7 +137,7 @@ Incompatibilities
 Bugs and Limitations
     Testing of the memcached subclass is skipped on all platforms as it
     requires "memcached" to be listening on the localhost's default
-    memcached port
+    memcached port *localhost:11211*
 
     Automated testing has been disabled due to inconsistancies in the CPAN
     testing platforms. See spurious results on previous releases

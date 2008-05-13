@@ -1,6 +1,6 @@
 package IPC::SRLock;
 
-# @(#)$Id: SRLock.pm 40 2008-04-29 17:18:39Z pjf $
+# @(#)$Id: SRLock.pm 45 2008-05-13 16:44:01Z pjf $
 
 use strict;
 use warnings;
@@ -13,7 +13,7 @@ use IPC::SRLock::ExceptionClass;
 use Time::Elapsed qw(elapsed);
 use Readonly;
 
-use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 40 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 45 $ =~ /\d+/gmx );
 
 Readonly my %ATTRS =>
    ( debug     => 0,
@@ -201,7 +201,7 @@ IPC::SRLock - Set/reset locking semantics to single thread processes
 
 =head1 Version
 
-0.1.$Revision: 40 $
+0.1.$Revision: 45 $
 
 =head1 Synopsis
 
@@ -392,7 +392,7 @@ The B<sysv> subclass will not work on cygwin
 
 Testing of the B<memcached> subclass is skipped on all platforms as it
 requires C<memcached> to be listening on the localhost's default
-memcached port
+memcached port I<localhost:11211>
 
 Automated testing has been disabled due to inconsistancies in the CPAN
 testing platforms. See spurious results on previous releases
