@@ -1,6 +1,6 @@
 package IPC::SRLock;
 
-# @(#)$Id: SRLock.pm 45 2008-05-13 16:44:01Z pjf $
+# @(#)$Id: SRLock.pm 48 2008-05-22 19:13:53Z pjf $
 
 use strict;
 use warnings;
@@ -13,7 +13,7 @@ use IPC::SRLock::ExceptionClass;
 use Time::Elapsed qw(elapsed);
 use Readonly;
 
-use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 45 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 48 $ =~ /\d+/gmx );
 
 Readonly my %ATTRS =>
    ( debug     => 0,
@@ -201,7 +201,7 @@ IPC::SRLock - Set/reset locking semantics to single thread processes
 
 =head1 Version
 
-0.1.$Revision: 45 $
+0.1.$Revision: 48 $
 
 =head1 Synopsis
 
@@ -233,7 +233,7 @@ subclasses; B<fcntl>, B<memcached> and B<sysv>
 =head3 fcntl
 
 Uses L<Fcntl> to lock access to a disk based file which is
-read/written by L<XML::Simple>. This is the default type. Files are in
+read/written by L<Data::Serializer>. This is the default type. Files are in
 B<tempdir> which defaults to I</tmp>
 
 =head3 memcached
@@ -364,6 +364,8 @@ None
 
 =item L<Class::Null>
 
+=item L<Data::Serializer>
+
 =item L<Date::Format>
 
 =item L<IO::AtomicFile>
@@ -380,8 +382,6 @@ None
 
 =item L<Time::HiRes>
 
-=item L<XML::Simple>
-
 =back
 
 =head1 Incompatibilities
@@ -393,9 +393,6 @@ The B<sysv> subclass will not work on cygwin
 Testing of the B<memcached> subclass is skipped on all platforms as it
 requires C<memcached> to be listening on the localhost's default
 memcached port I<localhost:11211>
-
-Automated testing has been disabled due to inconsistancies in the CPAN
-testing platforms. See spurious results on previous releases
 
 There are no known bugs in this module.
 Please report problems to the address below.

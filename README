@@ -2,7 +2,7 @@ Name
     IPC::SRLock - Set/reset locking semantics to single thread processes
 
 Version
-    0.1.$Revision: 45 $
+    0.1.$Revision: 48 $
 
 Synopsis
        use IPC::SRLock;
@@ -29,7 +29,7 @@ Subroutines/Methods
 
    fcntl
     Uses Fcntl to lock access to a disk based file which is read/written by
-    XML::Simple. This is the default type. Files are in tempdir which
+    Data::Serializer. This is the default type. Files are in tempdir which
     defaults to */tmp*
 
    memcached
@@ -121,6 +121,7 @@ Dependencies
     Class::Accessor::Fast
     Class::Inspector
     Class::Null
+    Data::Serializer
     Date::Format
     IO::AtomicFile
     IO::File
@@ -129,7 +130,6 @@ Dependencies
     Readonly
     Time::Elapsed
     Time::HiRes
-    XML::Simple
 
 Incompatibilities
     The sysv subclass will not work on cygwin
@@ -138,9 +138,6 @@ Bugs and Limitations
     Testing of the memcached subclass is skipped on all platforms as it
     requires "memcached" to be listening on the localhost's default
     memcached port *localhost:11211*
-
-    Automated testing has been disabled due to inconsistancies in the CPAN
-    testing platforms. See spurious results on previous releases
 
     There are no known bugs in this module. Please report problems to the
     address below. Patches are welcome
