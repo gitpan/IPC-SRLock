@@ -2,7 +2,7 @@ Name
     IPC::SRLock - Set/reset locking semantics to single thread processes
 
 Version
-    0.1.$Revision: 48 $
+    0.1.$Revision: 52 $
 
 Synopsis
        use IPC::SRLock;
@@ -21,23 +21,41 @@ Description
     Provides set/reset locking methods which will force a critical region of
     code to run single threaded
 
+Configuration and Environment
+    This class defines accessors and mutators for these attributes:
+
+    debug
+       Turns on debug output. Defaults to 0
+
+    log
+       If set to a log object, it's "debug" method is called if debugging is
+       turned on. Defaults to Class::Null
+
+    name
+       Used as the lock file names. Defaults to *ipc_srlock*
+
+    nap_time
+       How long to wait between polls of the lock table. Defaults to 0.5
+       seconds
+
+    patience
+       Time in seconds to wait for a lock before giving up. If set to 0
+       waits forever. Defaults to 0
+
+    pid
+       The process id doing the locking. Defaults to this processes id
+
+    time_out
+       Time in seconds before a lock is deemed to have expired. Defaults to
+       300
+
+    type
+       Determines which factory subclass is loaded. Defaults to *fcntl*
+
 Subroutines/Methods
   new
-    Implements the singleton pattern. The type attribute determines which
-    factory subclass is loaded. This package contains three subclasses;
-    fcntl, memcached and sysv
-
-   fcntl
-    Uses Fcntl to lock access to a disk based file which is read/written by
-    Data::Serializer. This is the default type. Files are in tempdir which
-    defaults to */tmp*
-
-   memcached
-    Uses Cache::Memcached to implement a distributed lock manager. The
-    servers attribute defaults to *localhost:11211*
-
-   sysv
-    Uses System V semaphores to lock access to a shared memory file
+    This constructor implements the singleton pattern, ensures that the
+    factory subclass is loaded in initialises it
 
   catch
     Expose the "catch" method in IPC::SRLock::ExceptionClass
@@ -52,6 +70,8 @@ Subroutines/Methods
     keys/values in the hash are suitable for passing to HTML::FormWidgets
 
   list
+       my $array_ref = $lock_obj->list;
+
     Returns an array of hash refs that represent the current lock table
 
   reset
@@ -110,26 +130,17 @@ Subroutines/Methods
     Should be overridden in the factory subclass
 
 Diagnostics
-    Setting "$app->debug" to true will cause the "set" methods to log the
-    lock record at the debug level, calls "$app->log->debug"
-
-Configuration and Environment
-    None
+    Setting debug to true will cause the "set" methods to log the lock
+    record at the debug level
 
 Dependencies
-    Cache::Memcached
     Class::Accessor::Fast
     Class::Inspector
     Class::Null
-    Data::Serializer
     Date::Format
-    IO::AtomicFile
-    IO::File
     IPC::SRLock::ExceptionClass
-    IPC::SysV
     Readonly
     Time::Elapsed
-    Time::HiRes
 
 Incompatibilities
     The sysv subclass will not work on cygwin

@@ -1,6 +1,6 @@
 package IPC::SRLock::Fcntl;
 
-# @(#)$Id: Fcntl.pm 47 2008-05-22 18:14:35Z pjf $
+# @(#)$Id: Fcntl.pm 52 2008-05-23 17:12:42Z pjf $
 
 use strict;
 use warnings;
@@ -14,7 +14,7 @@ use IO::File;
 use Readonly;
 use Time::HiRes qw(usleep);
 
-use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 47 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 52 $ =~ /\d+/gmx );
 
 Readonly my %ATTRS => ( lockfile   => undef,
                         mode       => oct q(0666),
@@ -161,6 +161,134 @@ sub _write_shmfile {
 1;
 
 __END__
+
+=pod
+
+=head1 Name
+
+IPC::SRLock::Fcntl - Set/reset locks using fcntl
+
+=head1 Version
+
+0.1.$Revision: 52 $
+
+=head1 Synopsis
+
+   use IPC::SRLock;
+
+   my $config   = { tempdir => q(path_to_tmp_directory), type => q(fcntl) };
+
+   my $lock_obj = IPC::SRLock->new( $config );
+
+=head1 Description
+
+Uses L<Fcntl> to lock access to a disk based file which is
+read/written by L<Data::Serializer>. This is the default type for
+L<IPC::SRLock>.
+
+=head1 Configuration and Environment
+
+This class defines accessors and mutators for these attributes:
+
+=over 3
+
+=item lockfile
+
+Path to the file used by fcntl
+
+=item mode
+
+File mode to use when creating the lock table file. Defaults to 0666
+
+=item shmfile
+
+Path to the lock table file
+
+=item tempdir
+
+Path to the directory where the lock files reside. Defaults to
+C<File::Spec-E<gt>tmpdir>
+
+=item umask
+
+The umask to set when creating the lock table file. Defaults to 0
+
+=back
+
+=head1 Subroutines/Methods
+
+=head2 _init
+
+Initialise the object
+
+=head2 _list
+
+List the contents of the lock table
+
+=head2 _read_shmfile
+
+Read the file containing the lock table from disk
+
+=head2 _release
+
+Release the exclusive flock on the lock file
+
+=head2 _reset
+
+Delete a lock from the lock table
+
+=head2 _set
+
+Set a lock in the lock table
+
+=head2 _write_shmfile
+
+Write the lock table to the disk file
+
+=head1 Diagnostics
+
+None
+
+=head1 Dependencies
+
+=over 4
+
+=item L<IPC::SRLock>
+
+=item L<Data::Serializer>
+
+=item L<IO::AtomicFile>
+
+=item L<Readonly>
+
+=back
+
+=head1 Incompatibilities
+
+There are no known incompatibilities in this module
+
+=head1 Bugs and Limitations
+
+There are no known bugs in this module.
+Please report problems to the address below.
+Patches are welcome
+
+=head1 Author
+
+Peter Flanigan, C<< <Support at RoxSoft.co.uk> >>
+
+=head1 License and Copyright
+
+Copyright (c) 2008 Peter Flanigan. All rights reserved
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself. See L<perlartistic>
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE
+
+=cut
 
 # Local Variables:
 # mode: perl

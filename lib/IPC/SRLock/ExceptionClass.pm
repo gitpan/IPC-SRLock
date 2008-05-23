@@ -1,6 +1,6 @@
 package IPC::SRLock::ExceptionClass;
 
-# @(#)$Id: ExceptionClass.pm 23 2008-04-15 11:37:28Z pjf $
+# @(#)$Id: ExceptionClass.pm 52 2008-05-23 17:12:42Z pjf $
 
 use strict;
 use warnings;
@@ -11,7 +11,7 @@ use English    qw(-no_match_vars);
 use List::Util qw(first);
 use Readonly;
 
-use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 23 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 52 $ =~ /\d+/gmx );
 
 Readonly my $NUL => q();
 
@@ -79,7 +79,7 @@ IPC::SRLock::ExceptionClass - Exception base class
 
 =head1 Version
 
-0.1.$Revision: 23 $
+0.1.$Revision: 52 $
 
 =head1 Synopsis
 
@@ -99,7 +99,7 @@ EVAL_ERROR has been set
 
    warn $e->as_string( $verbosity, $offset );
 
-Serialize the exception to a string. The passed parameters; B<verbosity>
+Serialise the exception to a string. The passed parameters; B<verbosity>
 and B<offset> determine how much output is returned
 
 The B<verbosity> parameter can be:

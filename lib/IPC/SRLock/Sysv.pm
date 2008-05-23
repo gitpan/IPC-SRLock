@@ -1,6 +1,6 @@
 package IPC::SRLock::Sysv;
 
-# @(#)$Id: Sysv.pm 39 2008-04-28 11:47:55Z pjf $
+# @(#)$Id: Sysv.pm 52 2008-05-23 17:12:42Z pjf $
 
 use strict;
 use warnings;
@@ -9,7 +9,7 @@ use IPC::SysV qw(IPC_CREAT);
 use Readonly;
 use Time::HiRes qw(usleep);
 
-use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 39 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 52 $ =~ /\d+/gmx );
 
 Readonly my %ATTRS => ( lockfile  => 195_911_405,
                         mode      => oct q(0666),
@@ -187,6 +187,126 @@ sub _set {
 1;
 
 __END__
+
+=pod
+
+=head1 Name
+
+IPC::SRLock::Sysv - Set/reset locks using semop and shmop
+
+=head1 Version
+
+0.1.$Revision: 52 $
+
+=head1 Synopsis
+
+   use IPC::SRLock;
+
+   my $config   = { tempdir => q(path_to_tmp_directory), type => q(sysv) };
+
+   my $lock_obj = IPC::SRLock->new( $config );
+
+=head1 Description
+
+Uses System V semaphores to lock access to a shared memory file
+
+=head1 Configuration and Environment
+
+This class defines accessors and mutators for these attributes:
+
+=over 3
+
+=item lockfile
+
+The key the the semaphore. Defaults to 195_911_405
+
+=item mode
+
+Mode to create the shared memory file. Defaults to 0666
+
+=item num_locks
+
+Maximum number of simultaneous locks. Defaults to 100
+
+=item shmfile
+
+The key to the shared memory file. Defaults to 195_911_405
+
+=item size
+
+Maximum size of a lock record. Limits the lock key to 255
+bytes. Defaults to 300
+
+=back
+
+=head1 Subroutines/Methods
+
+=head2 _init
+
+Initialise the object
+
+=head2 _get_semid
+
+Return the semaphore reference
+
+=head2 _get_shmid
+
+Return the shared memory reference
+
+=head2 _list
+
+List the contents of the lock table
+
+=head2 _reset
+
+Delete a lock from the lock table
+
+=head2 _set
+
+Set a lock in the lock table
+
+=head1 Diagnostics
+
+None
+
+=head1 Dependencies
+
+=over 4
+
+=item L<IPC::SRLock>
+
+=item L<IPC::SysV>
+
+=item L<Readonly>
+
+=back
+
+=head1 Incompatibilities
+
+There are no known incompatibilities in this module
+
+=head1 Bugs and Limitations
+
+There are no known bugs in this module.
+Please report problems to the address below.
+Patches are welcome
+
+=head1 Author
+
+Peter Flanigan, C<< <Support at RoxSoft.co.uk> >>
+
+=head1 License and Copyright
+
+Copyright (c) 2008 Peter Flanigan. All rights reserved
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself. See L<perlartistic>
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE
+
+=cut
 
 # Local Variables:
 # mode: perl
