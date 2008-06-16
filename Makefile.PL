@@ -19,6 +19,7 @@ WriteMakefile
                            'IPC::SysV' => '1.04',
                            'List::Util' => '1.19',
                            'Readonly' => '1.03',
+                           'Test::More' => '0.74',
                            'Time::Elapsed' => '0.10',
                            'Time::HiRes' => '1.9711',
                            'version' => '0.74'
