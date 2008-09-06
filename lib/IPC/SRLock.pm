@@ -1,6 +1,6 @@
 package IPC::SRLock;
 
-# @(#)$Id: SRLock.pm 65 2008-06-25 12:32:30Z pjf $
+# @(#)$Id: SRLock.pm 70 2008-09-06 15:49:29Z pjf $
 
 use strict;
 use warnings;
@@ -13,7 +13,7 @@ use IPC::SRLock::ExceptionClass;
 use Time::Elapsed qw(elapsed);
 use Readonly;
 
-use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 65 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 70 $ =~ /\d+/gmx );
 
 Readonly my %ATTRS =>
    ( debug     => 0,
@@ -203,7 +203,7 @@ IPC::SRLock - Set/reset locking semantics to single thread processes
 
 =head1 Version
 
-0.1.$Revision: 65 $
+0.1.$Revision: 70 $
 
 =head1 Synopsis
 
@@ -326,7 +326,7 @@ it to zero makes the lock last indefinitely
    $lock_obj->table_view( $stash, $model );
 
 The C<$model> object's methods store the result of calling
-C<$lock_obj-E<gt>get_table> on the C<$stash> hash ref
+C<< $lock_obj->get_table >> on the C<$stash> hash ref
 
 =head2 throw
 

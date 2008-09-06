@@ -1,0 +1,39 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.55.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 1745cd218ce07e4159da327fec9cb7aa8265c75a Changes
+SHA1 0190f62d6871f7927dcc90e40797c0f20645ddea LICENSE
+SHA1 dfa28abe49554b48716d049033878e97982e6329 MANIFEST
+SHA1 2dfd901d02d6c80230f492395dab245445aeaace META.yml
+SHA1 e9c2961b0fbe465ca2eee5a15f8f9dd6fb0fc204 Makefile.PL
+SHA1 32865ff621032b631d1fcdbdfdfa17c73793afe3 README
+SHA1 c37195fd27130e72052ae086b55aa92360681018 lib/IPC/SRLock.pm
+SHA1 17e64e0d1127e0b023dd7648a0d2f3159593172f lib/IPC/SRLock/ExceptionClass.pm
+SHA1 82e1a717d6bb0b141e88e993c48dd70a09fc1ec8 lib/IPC/SRLock/Fcntl.pm
+SHA1 c131708796791ac84ec6db9aef7434b38a8c087e lib/IPC/SRLock/Memcached.pm
+SHA1 ad036951dbc009f7eafe269e4f3a08424fc2f9b8 lib/IPC/SRLock/Sysv.pm
+SHA1 e7caec46b42f189136debadb4dce9f5d264815fc t/02pod.t
+SHA1 a0c28b4344c24b583bb898a3bd92c281641a7672 t/03podcoverage.t
+SHA1 efb51972cc1af28d655fac25d069df6f0064884c t/10base.t
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+
+iQCVAwUBSMKmxc4+W2711T3pAQLjFAP8DMKB8KrZdO3TYitdKdOhIBNr324oA0mz
+yZP2XEwOBKE8Vce6lk31Q4faXQHWuGDW2QlaHWLnZVE9JRHVID/06UTHDJEvQVcR
+VtqBBmR3nFBaGV7NJNtMVXMlVYrU2pGFUVQW3KSZ7rJ1iQE8/R818MRZXIIPIykd
+hv5f0rUU6nk=
+=9eVl
+-----END PGP SIGNATURE-----
