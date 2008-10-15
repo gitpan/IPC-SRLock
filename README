@@ -2,7 +2,7 @@ Name
     IPC::SRLock - Set/reset locking semantics to single thread processes
 
 Version
-    0.1.$Revision: 70 $
+    0.1.$Revision: 75 $
 
 Synopsis
        use IPC::SRLock;
@@ -101,18 +101,18 @@ Subroutines/Methods
     Return the text of the the timeout message
 
   _arg_list
-       my $args = $me->_arg_list( @rest );
+       my $args = $self->_arg_list( @rest );
 
     Returns a hash ref containing the passed parameter list. Enables methods
     to be called with either a list or a hash ref as it's input parameters
 
   _ensure_class_loaded
-       $me->_ensure_class_loaded( $some_class );
+       $self->_ensure_class_loaded( $some_class );
 
     Require the requested class, throw an error if it doesn't load
 
   _hash_merge
-       my $hash = $me->_hash_merge( { key1 => val1 }, { key2 => val2 } );
+       my $hash = $self->_hash_merge( { key1 => val1 }, { key2 => val2 } );
 
     Simplistic merging of two hashes
 
