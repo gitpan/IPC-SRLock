@@ -1,6 +1,6 @@
 package IPC::SRLock;
 
-# @(#)$Id: SRLock.pm 78 2008-10-19 17:03:46Z pjf $
+# @(#)$Id: SRLock.pm 80 2008-11-14 04:00:45Z pjf $
 
 use strict;
 use warnings;
@@ -13,7 +13,7 @@ use IPC::SRLock::ExceptionClass;
 use Time::Elapsed qw(elapsed);
 use Readonly;
 
-use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 78 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 80 $ =~ /\d+/gmx );
 
 Readonly my %ATTRS =>
    ( debug     => 0,
@@ -204,7 +204,7 @@ IPC::SRLock - Set/reset locking semantics to single thread processes
 
 =head1 Version
 
-0.1.$Revision: 78 $
+0.1.$Revision: 80 $
 
 =head1 Synopsis
 
@@ -434,3 +434,4 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE
 # mode: perl
 # tab-width: 3
 # End:
+
