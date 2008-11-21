@@ -22,7 +22,6 @@ WriteMakefile
                            'Exception::Class' => '1.23',
                            'IO::AtomicFile' => '2.110',
                            'IO::File' => '1.14',
-                           'IPC::SRLock::ExceptionClass' => '0',
                            'IPC::SysV' => '1.04',
                            'List::Util' => '1.19',
                            'Readonly' => '1.03',
