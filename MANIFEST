@@ -12,4 +12,5 @@ README
 t/02pod.t
 t/03podcoverage.t
 t/10base.t
+t/15kwalitee.t
 SIGNATURE    Added here by Module::Build

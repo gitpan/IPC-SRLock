@@ -1,5 +1,17 @@
 Revision history for IPC::SRLock
 
+0.2.100 28/02/2009
+        - Removed table_data method
+
+0.2.99  12/02/2009
+        - Dropped the singleton pattern from the construtor
+
+0.2.92  26/01/2009
+        - No longer depends on Readonly
+        - Now uses IPC::ShareLite in SysV store
+        - Added hclass table attribute to set key field to occupy most
+          space
+
 0.1.82  21/11/2008
         - Removed circular dependency on Exception::Class
 

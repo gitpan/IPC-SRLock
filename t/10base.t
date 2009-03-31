@@ -1,20 +1,22 @@
 #!/usr/bin/perl
 
-# @(#)$Id: 11lock.t 62 2008-04-11 01:20:52Z pjf $
+# @(#)$Id: 10base.t 98 2009-02-12 12:22:23Z pjf $
 
 use strict;
 use warnings;
 use English qw(-no_match_vars);
-use FindBin qw($Bin);
+use File::Spec::Functions;
+use FindBin  qw( $Bin );
+use lib (catdir( $Bin, updir, q(lib) ));
 use List::Util qw(first);
-use lib qq($Bin/../lib);
 use Test::More;
 
-use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 62 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.2.%d', q$Rev: 98 $ =~ /\d+/gmx );
 
 BEGIN {
-   if ($ENV{AUTOMATED_TESTING}
-       || ($ENV{PERL5OPT} || q()) =~ m{ CPAN-Reporter }mx) {
+   if ($ENV{AUTOMATED_TESTING} || $ENV{PERL_CR_SMOKER_CURRENT}
+       || ($ENV{PERL5OPT} || q()) =~ m{ CPAN-Reporter }mx
+       || ($ENV{PERL5_CPANPLUS_IS_RUNNING} && $ENV{PERL5_CPAN_IS_RUNNING})) {
       plan skip_all => q(CPAN Testing stopped);
    }
 
@@ -38,7 +40,6 @@ ok( !(first { $_ eq $PROGRAM_NAME }
 unlink q(/tmp/ipc_srlock.lck);
 unlink q(/tmp/ipc_srlock.shm);
 
-$lock->clear_lock_obj;
 $lock = IPC::SRLock->new( { type => q(sysv) } );
 $lock->set( k => $PROGRAM_NAME );
 
@@ -52,7 +53,6 @@ ok( !(first { $_ eq $PROGRAM_NAME }
 
 exit 0;
 
-$lock->clear_lock_obj;
 $lock = IPC::SRLock->new( { patience => 10, type => q(memcached) } );
 $lock->set( k => $PROGRAM_NAME );
 

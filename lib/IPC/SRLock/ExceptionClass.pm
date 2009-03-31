@@ -1,6 +1,6 @@
 package IPC::SRLock::ExceptionClass;
 
-# @(#)$Id: ExceptionClass.pm 71 2008-09-15 19:15:24Z pjf $
+# @(#)$Id: ExceptionClass.pm 96 2009-02-12 12:16:08Z pjf $
 
 use strict;
 use warnings;
@@ -9,11 +9,10 @@ use Exception::Class (
 use base       qw(IPC::SRLock::Exception);
 use English    qw(-no_match_vars);
 use List::Util qw(first);
-use Readonly;
 
-use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 71 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.2.%d', q$Rev: 96 $ =~ /\d+/gmx );
 
-Readonly my $NUL => q();
+my $NUL = q();
 
 our $IGNORE = [];
 
@@ -79,7 +78,7 @@ IPC::SRLock::ExceptionClass - Exception base class
 
 =head1 Version
 
-0.1.$Revision: 71 $
+0.2.$Revision: 96 $
 
 =head1 Synopsis
 
@@ -149,8 +148,6 @@ should be suppressed in the stack trace output
 =item L<Exception::Class>
 
 =item L<List::Util>
-
-=item L<Readonly>
 
 =back
 

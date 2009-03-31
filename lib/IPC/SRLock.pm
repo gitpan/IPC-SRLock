@@ -1,83 +1,73 @@
 package IPC::SRLock;
 
-# @(#)$Id: SRLock.pm 82 2008-11-21 20:40:56Z pjf $
+# @(#)$Id: SRLock.pm 100 2009-02-28 14:29:31Z pjf $
 
 use strict;
 use warnings;
-use base qw(Class::Accessor::Fast);
+use parent qw(Class::Accessor::Fast);
 use Class::Inspector;
 use Class::Null;
 use Date::Format;
 use English qw(-no_match_vars);
 use IPC::SRLock::ExceptionClass;
 use Time::Elapsed qw(elapsed);
-use Readonly;
 
-use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 82 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.2.%d', q$Rev: 100 $ =~ /\d+/gmx );
 
-Readonly my %ATTRS =>
-   ( debug     => 0,
-     log       => undef,
-     name      => (lc join q(_), split m{ :: }mx, __PACKAGE__),
-     nap_time  => 0.1,
-     patience  => 0,
-     pid       => undef,
-     time_out  => 300,
-     type      => q(fcntl), );
+my %ATTRS = ( debug    => 0,
+              log      => undef,
+              name     => (lc join q(_), split m{ :: }mx, __PACKAGE__),
+              nap_time => 0.1,
+              patience => 0,
+              pid      => undef,
+              time_out => 300,
+              type     => q(fcntl), );
 
 __PACKAGE__->mk_accessors( keys %ATTRS );
 
-my $_lock_obj;
-
 sub new {
-   my ($proto, @rest) = @_;
+   my ($self, @rest) = @_;
 
-   unless ($_lock_obj) {
-      my $args   = $proto->_arg_list( @rest );
-      my $attrs  = $proto->_hash_merge( \%ATTRS, $args );
-      my $class  = __PACKAGE__.q(::).(ucfirst $attrs->{type});
+   my $args  = $self->_arg_list( @rest );
+   my $attrs = $self->_hash_merge( \%ATTRS, $args );
+   my $class = __PACKAGE__.q(::).(ucfirst $attrs->{type});
 
-      $proto->_ensure_class_loaded( $class );
-      $_lock_obj = bless $attrs, $class;
-      $_lock_obj->log(   $_lock_obj->log || Class::Null->new() );
-      $_lock_obj->pid(   $PID );
-      $_lock_obj->_init( $args );
-   }
+   $self->_ensure_class_loaded( $class ); # Load factory subclass
 
-   return $_lock_obj;
+   my $new   = bless $attrs, $class;
+
+   $new->log(   $new->log || Class::Null->new() );
+   $new->pid(   $PID );
+   $new->_init( $args ); # Initialise factory subclass
+   return $new;
 }
 
 sub catch {
    my ($self, @rest) = @_; return IPC::SRLock::ExceptionClass->catch( @rest );
 }
 
-sub clear_lock_obj {
-   # Only for the test suite to re-initialise the lock instance
-   $_lock_obj = 0; return;
-}
-
 sub get_table {
-   my $self = shift; my ($count, $data, $flds, $lock, $tleft);
+   my $self  = shift;
+   my $count = 0;
+   my $data  = { align  => { id    => 'left',
+                             pid   => 'right',
+                             stime => 'right',
+                             tleft => 'right'},
+                 count  => $count,
+                 flds   => [ qw(id pid stime tleft) ],
+                 hclass => { id => q(most) },
+                 labels => { id    => 'Key',
+                             pid   => 'PID',
+                             stime => 'Lock Time',
+                             tleft => 'Time Left' },
+                 values => [] };
 
-   $count = 0;
-   $data  = { align  => { id    => 'left',
-                          pid   => 'right',
-                          stime => 'right',
-                          tleft => 'right'},
-              count  => $count,
-              flds   => [ qw(id pid stime tleft) ],
-              labels => { id    => 'Key',
-                          pid   => 'PID',
-                          stime => 'Lock Time',
-                          tleft => 'Time Left' },
-              values => [] };
-
-   for $lock (@{ $self->list }) {
-      $flds          = {};
+   for my $lock (@{ $self->list }) {
+      my $flds       = {};
       $flds->{id   } = $lock->{key};
       $flds->{pid  } = $lock->{pid};
       $flds->{stime} = time2str( q(%Y-%m-%d %H:%M:%S), $lock->{stime} );
-      $tleft         = $lock->{stime} + $lock->{timeout} - time;
+      my $tleft      = $lock->{stime} + $lock->{timeout} - time;
       $flds->{tleft} = $tleft > 0 ? elapsed( $tleft ) : 'Expired';
       $flds->{class}->{tleft}
                      = $tleft < 1 ? q(error dataValue) : q(odd dataValue);
@@ -110,17 +100,6 @@ sub set {
    return $self->_set( $key, $pid, $args->{t} || $self->time_out );
 }
 
-sub table_view {
-   my ($self, $s, $model) = @_; my $data = $self->get_table;
-
-   $model->add_field(    $s, { data   => $data,
-                               select => q(left),
-                               type   => q(table) } );
-   $model->group_fields( $s, { id     => q(lock_table.select), nitems => 1 } );
-   $model->add_buttons(  $s, qw(Delete) ) if ($data->{count} > 0);
-   return;
-}
-
 sub throw {
    my ($self, @rest) = @_; return IPC::SRLock::ExceptionClass->throw( @rest );
 }
@@ -145,22 +124,20 @@ sub _arg_list {
 }
 
 sub _ensure_class_loaded {
-   my ($self, $class) = @_; my $error;
+   my ($self, $class, $opts) = @_; my $error;
 
-   {
-## no critic
-      local $@;
-      eval "require $class;";
-      $error = $@;
-## critic
-   }
+   return 1 if (!$opts->{ignore_loaded} && Class::Inspector->loaded( $class ));
+
+   ## no critic
+   {  local $EVAL_ERROR; eval "require $class;"; $error = $EVAL_ERROR; }
+   ## critic
 
    $self->throw( $error ) if ($error);
 
    $self->throw( error => q(eUndefinedPackage), arg1 => $class )
-        unless (Class::Inspector->loaded( $class ));
+      unless (Class::Inspector->loaded( $class ));
 
-   return;
+   return 1;
 }
 
 sub _hash_merge {
@@ -204,7 +181,7 @@ IPC::SRLock - Set/reset locking semantics to single thread processes
 
 =head1 Version
 
-0.1.$Revision: 82 $
+0.2.$Revision: 100 $
 
 =head1 Synopsis
 
@@ -278,13 +255,9 @@ factory subclass is loaded in initialises it
 
 Expose the C<catch> method in L<IPC::SRLock::ExceptionClass>
 
-=head2 clear_lock_obj
-
-Sets the internal variable that holds the self referential object to
-false. This lets the test script create multiple lock objects with
-different factory subclasses
-
 =head2 get_table
+
+   my $data = $lock_obj->get_table;
 
 Returns a hash ref that contains the current lock table contents. The
 keys/values in the hash are suitable for passing to
@@ -298,9 +271,13 @@ Returns an array of hash refs that represent the current lock table
 
 =head2 reset
 
+   $lock_obj->reset( k => q(some_resource_key) );
+
 Resets the lock referenced by the B<k> attribute.
 
 =head2 set
+
+   $lock_obj->set( k => q(some_resource_key) );
 
 Sets the specified lock. Attributes are:
 
@@ -321,13 +298,6 @@ Set the time to live for this lock. Defaults to five minutes. Setting
 it to zero makes the lock last indefinitely
 
 =back
-
-=head2 table_view
-
-   $lock_obj->table_view( $stash, $model );
-
-The C<$model> object's methods store the result of calling
-C<< $lock_obj->get_table >> on the C<$stash> hash ref
 
 =head2 throw
 
@@ -392,8 +362,6 @@ the lock record at the debug level
 =item L<Date::Format>
 
 =item L<IPC::SRLock::ExceptionClass>
-
-=item L<Readonly>
 
 =item L<Time::Elapsed>
 

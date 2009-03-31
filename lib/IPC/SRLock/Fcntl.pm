@@ -1,27 +1,26 @@
 package IPC::SRLock::Fcntl;
 
-# @(#)$Id: Fcntl.pm 72 2008-09-25 10:25:06Z pjf $
+# @(#)$Id: Fcntl.pm 94 2009-02-12 12:00:07Z pjf $
 
 use strict;
 use warnings;
-use base qw(IPC::SRLock);
+use parent qw(IPC::SRLock);
 use Data::Serializer;
 use File::Spec;
 use File::Spec::Functions;
 use Fcntl qw(:flock);
 use IO::AtomicFile;
 use IO::File;
-use Readonly;
 use Time::HiRes qw(usleep);
 
-use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 72 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.2.%d', q$Rev: 94 $ =~ /\d+/gmx );
 
-Readonly my %ATTRS => ( lockfile   => undef,
-                        mode       => oct q(0666),
-                        serializer => undef,
-                        shmfile    => undef,
-                        tempdir    => File::Spec->tmpdir,
-                        umask      => 0, );
+my %ATTRS = ( lockfile   => undef,
+              mode       => oct q(0666),
+              serializer => undef,
+              shmfile    => undef,
+              tempdir    => File::Spec->tmpdir,
+              umask      => 0, );
 
 __PACKAGE__->mk_accessors( keys %ATTRS );
 
@@ -49,14 +48,15 @@ sub _init {
 }
 
 sub _list {
-   my $self = shift; my ($lock_file, $lock_ref) = $self->_read_shmfile;
-   my $list = [];
+   my $self = shift; my $list = [];
 
-   for (keys %{ $lock_ref }) {
-      push @{ $list }, { key     => $_,
-                         pid     => $lock_ref->{ $_ }->{spid},
-                         stime   => $lock_ref->{ $_ }->{stime},
-                         timeout => $lock_ref->{ $_ }->{timeout} };
+   my ($lock_file, $lock_ref) = $self->_read_shmfile;
+
+   while (my ($key, $hash) = each %{ $lock_ref }) {
+      push @{ $list }, { key     => $key,
+                         pid     => $hash->{spid},
+                         stime   => $hash->{stime},
+                         timeout => $hash->{timeout} };
    }
 
    $self->_release( $lock_file );
@@ -171,7 +171,7 @@ IPC::SRLock::Fcntl - Set/reset locks using fcntl
 
 =head1 Version
 
-0.1.$Revision: 72 $
+0.2.$Revision: 94 $
 
 =head1 Synopsis
 
@@ -259,8 +259,6 @@ None
 =item L<Data::Serializer>
 
 =item L<IO::AtomicFile>
-
-=item L<Readonly>
 
 =back
 

@@ -1,20 +1,19 @@
 package IPC::SRLock::Memcached;
 
-# @(#)$Id: Memcached.pm 72 2008-09-25 10:25:06Z pjf $
+# @(#)$Id: Memcached.pm 94 2009-02-12 12:00:07Z pjf $
 
 use strict;
 use warnings;
-use base qw(IPC::SRLock);
+use parent qw(IPC::SRLock);
 use Cache::Memcached;
-use Readonly;
 use Time::HiRes qw(usleep);
 
-use version; our $VERSION = qv( sprintf '0.1.%d', q$Rev: 72 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.2.%d', q$Rev: 94 $ =~ /\d+/gmx );
 
-Readonly my %ATTRS => ( lockfile  => q(_lockfile),
-                        memd      => undef,
-                        servers   => [ q(localhost:11211) ],
-                        shmfile   => q(_shmfile), );
+my %ATTRS = ( lockfile  => q(_lockfile),
+              memd      => undef,
+              servers   => [ q(localhost:11211) ],
+              shmfile   => q(_shmfile), );
 
 __PACKAGE__->mk_accessors( keys %ATTRS );
 
@@ -150,7 +149,7 @@ IPC::SRLock::Memcached - Set/reset locks using libmemcache
 
 =head1 Version
 
-0.1.$Revision: 72 $
+0.2.$Revision: 94 $
 
 =head1 Synopsis
 
@@ -221,8 +220,6 @@ None
 =item L<IPC::SRLock>
 
 =item L<Cache::Memcached>
-
-=item L<Readonly>
 
 =back
 

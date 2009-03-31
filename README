@@ -2,7 +2,7 @@ Name
     IPC::SRLock - Set/reset locking semantics to single thread processes
 
 Version
-    0.1.$Revision: 82 $
+    0.2.$Revision: 100 $
 
 Synopsis
        use IPC::SRLock;
@@ -60,12 +60,9 @@ Subroutines/Methods
   catch
     Expose the "catch" method in IPC::SRLock::ExceptionClass
 
-  clear_lock_obj
-    Sets the internal variable that holds the self referential object to
-    false. This lets the test script create multiple lock objects with
-    different factory subclasses
-
   get_table
+       my $data = $lock_obj->get_table;
+
     Returns a hash ref that contains the current lock table contents. The
     keys/values in the hash are suitable for passing to HTML::FormWidgets
 
@@ -75,9 +72,13 @@ Subroutines/Methods
     Returns an array of hash refs that represent the current lock table
 
   reset
+       $lock_obj->reset( k => q(some_resource_key) );
+
     Resets the lock referenced by the k attribute.
 
   set
+       $lock_obj->set( k => q(some_resource_key) );
+
     Sets the specified lock. Attributes are:
 
     k  Unique key to identify the lock. Mandatory no default
@@ -87,12 +88,6 @@ Subroutines/Methods
 
     t  Set the time to live for this lock. Defaults to five minutes. Setting
        it to zero makes the lock last indefinitely
-
-  table_view
-       $lock_obj->table_view( $stash, $model );
-
-    The $model object's methods store the result of calling
-    "$lock_obj->get_table" on the $stash hash ref
 
   throw
     Expose the "throw" method in "IPC::SRLock::ExceptionClass"
@@ -139,7 +134,6 @@ Dependencies
     Class::Null
     Date::Format
     IPC::SRLock::ExceptionClass
-    Readonly
     Time::Elapsed
 
 Incompatibilities
