@@ -1,17 +1,14 @@
-#!/usr/bin/perl
-
-# @(#)$Id: 10base.t 98 2009-02-12 12:22:23Z pjf $
+# @(#)$Id: 10base.t 113 2009-05-02 16:53:33Z pjf $
 
 use strict;
 use warnings;
-use English qw(-no_match_vars);
 use File::Spec::Functions;
+use English  qw( -no_match_vars );
 use FindBin  qw( $Bin );
 use lib (catdir( $Bin, updir, q(lib) ));
-use List::Util qw(first);
 use Test::More;
 
-use version; our $VERSION = qv( sprintf '0.2.%d', q$Rev: 98 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.2.%d', q$Rev: 113 $ =~ /\d+/gmx );
 
 BEGIN {
    if ($ENV{AUTOMATED_TESTING} || $ENV{PERL_CR_SMOKER_CURRENT}
@@ -22,6 +19,8 @@ BEGIN {
 
    plan tests => 5;
 }
+
+use List::Util qw(first);
 
 use_ok q(IPC::SRLock);
 
@@ -63,3 +62,8 @@ $lock->reset( k => $PROGRAM_NAME );
 
 ok( !(first { $_ eq $PROGRAM_NAME }
       map   { $_->{key} } @{ $lock->list() }), q(lock reset memcached) );
+
+# Local Variables:
+# mode: perl
+# tab-width: 3
+# End:

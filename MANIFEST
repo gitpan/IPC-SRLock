@@ -1,4 +1,5 @@
 Changes
+Debian_CPANTS.txt
 lib/IPC/SRLock.pm
 lib/IPC/SRLock/ExceptionClass.pm
 lib/IPC/SRLock/Fcntl.pm
@@ -9,8 +10,9 @@ Makefile.PL
 MANIFEST			This list of files
 META.yml
 README
+t/01always_pass.t
 t/02pod.t
 t/03podcoverage.t
+t/05kwalitee.t
 t/10base.t
-t/15kwalitee.t
 SIGNATURE    Added here by Module::Build

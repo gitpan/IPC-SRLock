@@ -1,18 +1,18 @@
-package IPC::SRLock;
+# @(#)$Id: SRLock.pm 118 2009-06-06 17:14:04Z pjf $
 
-# @(#)$Id: SRLock.pm 100 2009-02-28 14:29:31Z pjf $
+package IPC::SRLock;
 
 use strict;
 use warnings;
+use version; our $VERSION = qv( sprintf '0.2.%d', q$Rev: 118 $ =~ /\d+/gmx );
 use parent qw(Class::Accessor::Fast);
+
 use Class::Inspector;
 use Class::Null;
 use Date::Format;
 use English qw(-no_match_vars);
 use IPC::SRLock::ExceptionClass;
 use Time::Elapsed qw(elapsed);
-
-use version; our $VERSION = qv( sprintf '0.2.%d', q$Rev: 100 $ =~ /\d+/gmx );
 
 my %ATTRS = ( debug    => 0,
               log      => undef,
@@ -36,8 +36,8 @@ sub new {
 
    my $new   = bless $attrs, $class;
 
-   $new->log(   $new->log || Class::Null->new() );
-   $new->pid(   $PID );
+   $new->log  ( $new->log || Class::Null->new() );
+   $new->pid  ( $PID );
    $new->_init( $args ); # Initialise factory subclass
    return $new;
 }
@@ -86,7 +86,7 @@ sub list {
 sub reset {
    my ($self, @rest) = @_; my $args = $self->_arg_list( @rest );
 
-   $self->throw( q(eNoKey) ) unless (my $key = $args->{k});
+   $self->throw( 'No key specified' ) unless (my $key = $args->{k});
 
    return $self->_reset( $key );
 }
@@ -94,8 +94,11 @@ sub reset {
 sub set {
    my ($self, @rest) = @_; my $args = $self->_arg_list( @rest );
 
-   $self->throw( q(eNoKey) )       unless (my $key = $args->{k});
-   $self->throw( q(eNoProcessId) ) unless (my $pid = $args->{p} || $self->pid);
+   $self->throw( 'No key specified' ) unless (my $key = $args->{k});
+
+   my $pid = $args->{p} || $self->pid;
+
+   $self->throw( 'No pid specified' ) unless ($pid);
 
    return $self->_set( $key, $pid, $args->{t} || $self->time_out );
 }
@@ -134,7 +137,7 @@ sub _ensure_class_loaded {
 
    $self->throw( $error ) if ($error);
 
-   $self->throw( error => q(eUndefinedPackage), arg1 => $class )
+   $self->throw( error => 'Class [_1] failed to load', args => [ $class ] )
       unless (Class::Inspector->loaded( $class ));
 
    return 1;
@@ -151,21 +154,24 @@ sub _init {
 sub _list {
    my $self = shift;
 
-   $self->throw( error => q(eNotOverridden), arg1 => q(list) );
+   $self->throw( error => 'Method [_1] not overridden in [_2]',
+                 args  => [ q(_list), ref $self || $self ] );
    return;
 }
 
 sub _reset {
    my $self = shift;
 
-   $self->throw( error => q(eNotOverridden), arg1 => q(reset) );
+   $self->throw( error => 'Method [_1] not overridden in [_2]',
+                 args  => [ q(_reset), ref $self || $self ] );
    return;
 }
 
 sub _set {
    my $self = shift;
 
-   $self->throw( error => q(eNotOverridden), arg1 => q(set) );
+   $self->throw( error => 'Method [_1] not overridden in [_2]',
+                 args  => [ q(_set), ref $self || $self ] );
    return;
 }
 
@@ -181,7 +187,7 @@ IPC::SRLock - Set/reset locking semantics to single thread processes
 
 =head1 Version
 
-0.2.$Revision: 100 $
+0.2.$Revision: 118 $
 
 =head1 Synopsis
 
@@ -402,3 +408,4 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE
 # mode: perl
 # tab-width: 3
 # End:
+
