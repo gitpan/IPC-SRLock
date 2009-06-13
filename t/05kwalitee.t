@@ -1,14 +1,14 @@
-# @(#)$Id: 05kwalitee.t 110 2009-04-22 23:59:10Z pjf $
+# @(#)$Id: 05kwalitee.t 125 2009-06-13 19:55:41Z pjf $
 
 use strict;
 use warnings;
+use version; our $VERSION = qv( sprintf '0.3.%d', q$Rev: 125 $ =~ /\d+/gmx );
 use File::Spec::Functions;
-use English  qw( -no_match_vars );
-use FindBin  qw( $Bin );
-use lib (catdir( $Bin, updir, q(lib) ));
-use Test::More;
+use FindBin qw( $Bin );
+use lib catdir( $Bin, updir, q(lib) );
 
-use version; our $VERSION = qv( sprintf '0.2.%d', q$Rev: 110 $ =~ /\d+/gmx );
+use English qw( -no_match_vars );
+use Test::More;
 
 if (!-e catfile( $Bin, updir, q(MANIFEST.SKIP) )) {
    plan skip_all => 'Kwalitee test only for developers';
