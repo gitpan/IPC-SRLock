@@ -15,7 +15,7 @@ WriteMakefile
           'PREREQ_PM' => {
                            'Cache::Memcached' => '1.24',
                            'Class::Accessor::Fast' => '0.31',
-                           'Class::Inspector' => '1.18',
+                           'Class::MOP' => '0.84',
                            'Class::Null' => '1.09',
                            'Data::Serializer' => '0.46',
                            'Date::Format' => '2.22',

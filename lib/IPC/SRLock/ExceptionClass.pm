@@ -1,17 +1,16 @@
-# @(#)$Id: ExceptionClass.pm 125 2009-06-13 19:55:41Z pjf $
+# @(#)$Id: ExceptionClass.pm 126 2009-06-16 18:55:44Z pjf $
 
 package IPC::SRLock::ExceptionClass;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.3.%d', q$Rev: 125 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.3.%d', q$Rev: 126 $ =~ /\d+/gmx );
 use Exception::Class
    ( 'IPC::SRLock::Exception' => { fields => [qw(args out rv)] } );
 use base qw(IPC::SRLock::Exception);
 
-use English    qw(-no_match_vars);
-use List::Util qw(first);
 use Carp;
+use English qw(-no_match_vars);
 
 my $NUL = q();
 
@@ -21,8 +20,6 @@ sub catch {
    my ($self, @rest) = @_; my $e;
 
    return $e if ($e = $self->caught( @rest ));
-
-   return $EVAL_ERROR if (ref $EVAL_ERROR);
 
    return $self->new( args           => [],
                       ignore_package => $IGNORE,
@@ -85,7 +82,7 @@ IPC::SRLock::ExceptionClass - Exception base class
 
 =head1 Version
 
-0.3.$Revision: 125 $
+0.3.$Revision: 126 $
 
 =head1 Synopsis
 

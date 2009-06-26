@@ -1,13 +1,13 @@
-# @(#)$Id: SRLock.pm 125 2009-06-13 19:55:41Z pjf $
+# @(#)$Id: SRLock.pm 137 2009-06-26 23:50:45Z pjf $
 
 package IPC::SRLock;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.3.%d', q$Rev: 125 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.3.%d', q$Rev: 137 $ =~ /\d+/gmx );
 use parent qw(Class::Accessor::Fast);
 
-use Class::Inspector;
+use Class::MOP;
 use Class::Null;
 use Date::Format;
 use English qw(-no_match_vars);
@@ -127,18 +127,23 @@ sub _arg_list {
 }
 
 sub _ensure_class_loaded {
-   my ($self, $class, $opts) = @_; my $error;
+   my ($self, $class, $opts) = @_; my $error; $opts ||= {};
 
-   return 1 if (!$opts->{ignore_loaded} && Class::Inspector->loaded( $class ));
+   my $is_class_loaded = sub { Class::MOP::is_class_loaded( $class ) };
 
-   ## no critic
-   {  local $EVAL_ERROR; eval "require $class;"; $error = $EVAL_ERROR; }
-   ## critic
+   return 1 if (not $opts->{ignore_loaded} and $is_class_loaded->());
+
+   {  local $EVAL_ERROR = undef;
+      eval { Class::MOP::load_class( $class ) };
+      $error = $EVAL_ERROR;
+   }
 
    $self->throw( $error ) if ($error);
 
-   $self->throw( error => 'Class [_1] failed to load', args => [ $class ] )
-      unless (Class::Inspector->loaded( $class ));
+   unless ($is_class_loaded->()) {
+      $error = 'Class [_1] loaded but package undefined';
+      $self->throw( error => $error, args => [ $class ] );
+   }
 
    return 1;
 }
@@ -187,7 +192,7 @@ IPC::SRLock - Set/reset locking semantics to single thread processes
 
 =head1 Version
 
-0.3.$Revision: 125 $
+0.3.$Revision: 137 $
 
 =head1 Synopsis
 
@@ -361,7 +366,7 @@ the lock record at the debug level
 
 =item L<Class::Accessor::Fast>
 
-=item L<Class::Inspector>
+=item L<Class::MOP>
 
 =item L<Class::Null>
 
@@ -408,4 +413,3 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE
 # mode: perl
 # tab-width: 3
 # End:
-
