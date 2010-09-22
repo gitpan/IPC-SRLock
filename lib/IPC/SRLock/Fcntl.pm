@@ -1,10 +1,10 @@
-# @(#)$Id: Fcntl.pm 147 2010-09-22 01:43:20Z pjf $
+# @(#)$Id: Fcntl.pm 150 2010-09-22 18:44:19Z pjf $
 
 package IPC::SRLock::Fcntl;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.4.%d', q$Rev: 147 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.5.%d', q$Rev: 150 $ =~ /\d+/gmx );
 use parent qw(IPC::SRLock);
 
 use Data::Serializer;
@@ -14,6 +14,7 @@ use Fcntl qw(:flock);
 use IO::AtomicFile;
 use IO::File;
 use Time::HiRes qw(usleep);
+use Try::Tiny;
 
 my %ATTRS = ( lockfile   => undef,
               mode       => oct q(0666),
@@ -76,11 +77,8 @@ sub _read_shmfile {
    flock $lock, LOCK_EX;
 
    if (-f $self->shmfile) {
-      $ref = eval { $self->serializer->retrieve( $self->shmfile ) };
-
-      if ($e = $self->catch) {
-         $self->_release( $lock ); $self->throw( $e );
-      }
+      try   { $ref = $self->serializer->retrieve( $self->shmfile ) }
+      catch { $self->_release( $lock ); $self->throw( $_ ) };
    }
    else { $ref = {} }
 
@@ -151,11 +149,8 @@ sub _write_shmfile {
                     args  => [ $self->shmfile ] );
    }
 
-   eval { $self->serializer->store( $lock_ref, $wtr ) };
-
-   if ($e = $self->catch) {
-      $wtr->delete; $self->_release( $lock_file ); $self->throw( $e );
-   }
+   try   { $self->serializer->store( $lock_ref, $wtr ) }
+   catch { $wtr->delete; $self->_release( $lock_file ); $self->throw( $_ ) };
 
    $wtr->close; $self->_release( $lock_file );
    return;
@@ -173,7 +168,7 @@ IPC::SRLock::Fcntl - Set/reset locks using fcntl
 
 =head1 Version
 
-0.4.$Revision: 147 $
+0.5.$Revision: 150 $
 
 =head1 Synopsis
 

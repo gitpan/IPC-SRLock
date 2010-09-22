@@ -1,10 +1,10 @@
-# @(#)$Id: Sysv.pm 147 2010-09-22 01:43:20Z pjf $
+# @(#)$Id: Sysv.pm 150 2010-09-22 18:44:19Z pjf $
 
 package IPC::SRLock::Sysv;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.4.%d', q$Rev: 147 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.5.%d', q$Rev: 150 $ =~ /\d+/gmx );
 use parent qw(IPC::SRLock);
 
 use IPC::ShareLite qw(:lock);
@@ -31,11 +31,8 @@ sub _init {
                                     '-mode'   => $self->mode,
                                     '-size'   => $self->size );
 
-   unless ($share) {
-      $self->throw( error => 'No shared memory [_1]',
-                    args  => [ $self->lockfile ] );
-   }
-
+   $share or $self->throw( error => 'No shared memory [_1]',
+                           args  => [ $self->lockfile ] );
    $self->_share( $share );
    return;
 }
@@ -70,13 +67,11 @@ sub _reset {
    my $hash  = $data ? thaw( $data ) : {};
    my $found = delete $hash->{ $key };
 
-   $self->_share->store( freeze( $hash ) ) if ($found);
+   $found and $self->_share->store( freeze( $hash ) );
 
    $self->_share->unlock;
 
-   unless ($found) {
-      $self->throw( error => 'Lock [_1] not set', args => [ $key ] );
-   }
+   $found or $self->throw( error => 'Lock [_1] not set', args => [ $key ] );
 
    return 1;
 }
@@ -119,10 +114,10 @@ sub _set {
          $self->throw( error => 'Lock [_1] timed out', args => [ $key ] );
       }
 
-      usleep( 1_000_000 * $self->nap_time ) if ($found);
+      $found and usleep( 1_000_000 * $self->nap_time );
    }
 
-   $self->log->debug( "Lock $key set by $pid\n" ) if ($self->debug);
+   $self->debug and $self->log->debug( "Lock $key set by $pid\n" );
 
    return 1;
 }
@@ -148,7 +143,7 @@ IPC::SRLock::Sysv - Set/reset locks using semop and shmop
 
 =head1 Version
 
-0.4.$Revision: 147 $
+0.5.$Revision: 150 $
 
 =head1 Synopsis
 

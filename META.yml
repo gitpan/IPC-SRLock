@@ -21,19 +21,19 @@ no_index:
 provides:
   IPC::SRLock:
     file: lib/IPC/SRLock.pm
-    version: 0.4.147
+    version: 0.5.150
   IPC::SRLock::ExceptionClass:
     file: lib/IPC/SRLock/ExceptionClass.pm
-    version: 0.4.147
+    version: 0.5.150
   IPC::SRLock::Fcntl:
     file: lib/IPC/SRLock/Fcntl.pm
-    version: 0.4.147
+    version: 0.5.150
   IPC::SRLock::Memcached:
     file: lib/IPC/SRLock/Memcached.pm
-    version: 0.4.147
+    version: 0.5.150
   IPC::SRLock::Sysv:
     file: lib/IPC/SRLock/Sysv.pm
-    version: 0.4.147
+    version: 0.5.150
 requires:
   Cache::Memcached: 1.24
   Class::Accessor::Fast: 0.31
@@ -50,10 +50,10 @@ requires:
   Storable: 2.15
   Time::Elapsed: 0.10
   Time::HiRes: 1.9711
-  TryCatch: 1.002000
+  Try::Tiny: 0.06
   parent: 0.221
   perl: 5.008
   version: 0.74
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.4.147
+version: 0.5.150

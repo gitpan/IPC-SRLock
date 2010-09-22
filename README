@@ -2,7 +2,7 @@ Name
     IPC::SRLock - Set/reset locking semantics to single thread processes
 
 Version
-    0.4.$Revision: 147 $
+    0.5.$Revision: 150 $
 
 Synopsis
        use IPC::SRLock;
@@ -106,8 +106,8 @@ Subroutines/Methods
 
     Require the requested class, throw an error if it doesn't load
 
-  _hash_merge
-       my $hash = $self->_hash_merge( { key1 => val1 }, { key2 => val2 } );
+  __hash_merge
+       my $hash = __hash_merge( { key1 => val1 }, { key2 => val2 } );
 
     Simplistic merging of two hashes
 
