@@ -1,10 +1,10 @@
-# @(#)$Id: ExceptionClass.pm 126 2009-06-16 18:55:44Z pjf $
+# @(#)$Id: ExceptionClass.pm 147 2010-09-22 01:43:20Z pjf $
 
 package IPC::SRLock::ExceptionClass;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.3.%d', q$Rev: 126 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.4.%d', q$Rev: 147 $ =~ /\d+/gmx );
 use Exception::Class
    ( 'IPC::SRLock::Exception' => { fields => [qw(args out rv)] } );
 use base qw(IPC::SRLock::Exception);
@@ -82,7 +82,7 @@ IPC::SRLock::ExceptionClass - Exception base class
 
 =head1 Version
 
-0.3.$Revision: 126 $
+0.4.$Revision: 147 $
 
 =head1 Synopsis
 

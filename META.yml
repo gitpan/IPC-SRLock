@@ -1,15 +1,39 @@
 ---
-name: IPC-SRLock
-version: 0.3.137
+abstract: 'Set/reset locking semantics to single thread processes'
 author:
   - 'Peter Flanigan, C<< <Support at RoxSoft.co.uk> >>'
-abstract: Set/reset locking semantics to single thread processes
-license: perl
-resources:
-  license: http://dev.perl.org/licenses/
+build_requires:
+  Exception::Class: 1.23
+  List::Util: 1.19
+  Test::More: 0.74
 configure_requires:
-  ExtUtils::MakeMaker: 6.42
+  Module::Build: 0.36
   version: 0.74
+generated_by: 'Module::Build version 0.3607'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: IPC-SRLock
+no_index:
+  directory:
+    - t
+provides:
+  IPC::SRLock:
+    file: lib/IPC/SRLock.pm
+    version: 0.4.147
+  IPC::SRLock::ExceptionClass:
+    file: lib/IPC/SRLock/ExceptionClass.pm
+    version: 0.4.147
+  IPC::SRLock::Fcntl:
+    file: lib/IPC/SRLock/Fcntl.pm
+    version: 0.4.147
+  IPC::SRLock::Memcached:
+    file: lib/IPC/SRLock/Memcached.pm
+    version: 0.4.147
+  IPC::SRLock::Sysv:
+    file: lib/IPC/SRLock/Sysv.pm
+    version: 0.4.147
 requires:
   Cache::Memcached: 1.24
   Class::Accessor::Fast: 0.31
@@ -26,30 +50,10 @@ requires:
   Storable: 2.15
   Time::Elapsed: 0.10
   Time::HiRes: 1.9711
+  TryCatch: 1.002000
   parent: 0.221
   perl: 5.008
   version: 0.74
-build_requires:
-  Exception::Class: 1.23
-  List::Util: 1.19
-  Test::More: 0.74
-provides:
-  IPC::SRLock:
-    file: lib/IPC/SRLock.pm
-    version: 0.3.137
-  IPC::SRLock::ExceptionClass:
-    file: lib/IPC/SRLock/ExceptionClass.pm
-    version: 0.3.126
-  IPC::SRLock::Fcntl:
-    file: lib/IPC/SRLock/Fcntl.pm
-    version: 0.3.125
-  IPC::SRLock::Memcached:
-    file: lib/IPC/SRLock/Memcached.pm
-    version: 0.3.125
-  IPC::SRLock::Sysv:
-    file: lib/IPC/SRLock/Sysv.pm
-    version: 0.3.125
-generated_by: Module::Build version 0.31
-meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.4.html
-  version: 1.4
+resources:
+  license: http://dev.perl.org/licenses/
+version: 0.4.147

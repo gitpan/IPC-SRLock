@@ -1,10 +1,10 @@
-# @(#)$Id: SRLock.pm 137 2009-06-26 23:50:45Z pjf $
+# @(#)$Id: SRLock.pm 147 2010-09-22 01:43:20Z pjf $
 
 package IPC::SRLock;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.3.%d', q$Rev: 137 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.4.%d', q$Rev: 147 $ =~ /\d+/gmx );
 use parent qw(Class::Accessor::Fast);
 
 use Class::MOP;
@@ -13,6 +13,7 @@ use Date::Format;
 use English qw(-no_match_vars);
 use IPC::SRLock::ExceptionClass;
 use Time::Elapsed qw(elapsed);
+use TryCatch;
 
 my %ATTRS = ( debug    => 0,
               log      => undef,
@@ -88,7 +89,7 @@ sub reset {
 
    $self->throw( 'No key specified' ) unless (my $key = $args->{k});
 
-   return $self->_reset( $key );
+   return $self->_reset( q().$key );
 }
 
 sub set {
@@ -100,7 +101,7 @@ sub set {
 
    $self->throw( 'No pid specified' ) unless ($pid);
 
-   return $self->_set( $key, $pid, $args->{t} || $self->time_out );
+   return $self->_set( q().$key, $pid, $args->{t} || $self->time_out );
 }
 
 sub throw {
@@ -127,25 +128,21 @@ sub _arg_list {
 }
 
 sub _ensure_class_loaded {
-   my ($self, $class, $opts) = @_; my $error; $opts ||= {};
+   my ($self, $class, $opts) = @_; $opts ||= {};
 
-   my $is_class_loaded = sub { Class::MOP::is_class_loaded( $class ) };
+   my $package_defined = sub { Class::MOP::is_class_loaded( $class ) };
 
-   return 1 if (not $opts->{ignore_loaded} and $is_class_loaded->());
+   return 1 if (not $opts->{ignore_loaded} and $package_defined->());
 
-   {  local $EVAL_ERROR = undef;
-      eval { Class::MOP::load_class( $class ) };
-      $error = $EVAL_ERROR;
-   }
+   try        { Class::MOP::load_class( $class ) }
+   catch ($e) { $self->throw( $e ) }
 
-   $self->throw( $error ) if ($error);
+   return 1 if ($package_defined->());
 
-   unless ($is_class_loaded->()) {
-      $error = 'Class [_1] loaded but package undefined';
-      $self->throw( error => $error, args => [ $class ] );
-   }
+   my $e = 'Class [_1] loaded but package undefined';
 
-   return 1;
+   $self->throw( error => $e, args => [ $class ] );
+   return; # Never reached
 }
 
 sub _hash_merge {
@@ -192,7 +189,7 @@ IPC::SRLock - Set/reset locking semantics to single thread processes
 
 =head1 Version
 
-0.3.$Revision: 137 $
+0.4.$Revision: 147 $
 
 =head1 Synopsis
 
@@ -413,3 +410,4 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE
 # mode: perl
 # tab-width: 3
 # End:
+
