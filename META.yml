@@ -7,7 +7,7 @@ build_requires:
   List::Util: 1.19
   Test::More: 0.74
 configure_requires:
-  Module::Build: 0.36
+  Module::Build: 0.32
   version: 0.74
 generated_by: 'Module::Build version 0.3607'
 license: perl
@@ -21,7 +21,7 @@ no_index:
 provides:
   IPC::SRLock:
     file: lib/IPC/SRLock.pm
-    version: 0.5.150
+    version: 0.5.154
   IPC::SRLock::ExceptionClass:
     file: lib/IPC/SRLock/ExceptionClass.pm
     version: 0.5.150
@@ -56,4 +56,4 @@ requires:
   version: 0.74
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.5.150
+version: 0.5.154
