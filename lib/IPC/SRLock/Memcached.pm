@@ -1,10 +1,10 @@
-# @(#)$Id: Memcached.pm 150 2010-09-22 18:44:19Z pjf $
+# @(#)$Id: Memcached.pm 164 2010-12-18 18:19:08Z pjf $
 
 package IPC::SRLock::Memcached;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.5.%d', q$Rev: 150 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.6.%d', q$Rev: 164 $ =~ /\d+/gmx );
 use parent qw(IPC::SRLock);
 
 use Cache::Memcached;
@@ -22,7 +22,7 @@ __PACKAGE__->mk_accessors( keys %ATTRS );
 sub _init {
    my $self = shift;
 
-   for (grep { !defined $self->{ $_ } } keys %ATTRS) {
+   for (grep { not defined $self->{ $_ } } keys %ATTRS) {
       $self->{ $_ } = $ATTRS{ $_ };
    }
 
@@ -147,7 +147,7 @@ IPC::SRLock::Memcached - Set/reset locks using libmemcache
 
 =head1 Version
 
-0.5.$Revision: 150 $
+0.6.$Revision: 164 $
 
 =head1 Synopsis
 

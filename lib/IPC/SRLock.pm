@@ -1,17 +1,17 @@
-# @(#)$Id: SRLock.pm 154 2010-09-28 19:38:53Z pjf $
+# @(#)$Id: SRLock.pm 164 2010-12-18 18:19:08Z pjf $
 
 package IPC::SRLock;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.5.%d', q$Rev: 154 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.6.%d', q$Rev: 164 $ =~ /\d+/gmx );
 use parent qw(Class::Accessor::Fast);
 
 use Class::MOP;
 use Class::Null;
 use Date::Format;
 use English qw(-no_match_vars);
-use IPC::SRLock::ExceptionClass;
+use IPC::SRLock::Exception;
 use Time::Elapsed qw(elapsed);
 use Try::Tiny;
 
@@ -101,7 +101,7 @@ sub set {
 }
 
 sub throw {
-   my ($self, @rest) = @_; return IPC::SRLock::ExceptionClass->throw( @rest );
+   my ($self, @rest) = @_; return IPC::SRLock::Exception->throw( @rest );
 }
 
 sub timeout_error {
@@ -185,7 +185,7 @@ IPC::SRLock - Set/reset locking semantics to single thread processes
 
 =head1 Version
 
-0.5.$Revision: 154 $
+0.6.$Revision: 164 $
 
 =head1 Synopsis
 
@@ -391,7 +391,7 @@ Peter Flanigan, C<< <Support at RoxSoft.co.uk> >>
 
 =head1 License and Copyright
 
-Copyright (c) 2008 Peter Flanigan. All rights reserved
+Copyright (c) 2008-2010 Peter Flanigan. All rights reserved
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself. See L<perlartistic>
@@ -406,3 +406,4 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE
 # mode: perl
 # tab-width: 3
 # End:
+

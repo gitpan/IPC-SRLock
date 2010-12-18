@@ -1,5 +1,12 @@
 Revision history for IPC::SRLock
 
+0.6.164 - 2010-12-18
+        - Suppressed Konig CPAN testing
+        - Switched to Storable::nfreeze to be like Ovid
+        - Added subroutine names to stack trace
+        - Updated exception handling class
+        - Fixed error handling in Sysv subclass
+
 0.5.154 - 2010-09-28
         - Removed execute permission from Build.PL
 
