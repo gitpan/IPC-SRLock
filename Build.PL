@@ -1,4 +1,4 @@
-# @(#)$Id: Build.PL 164 2010-12-18 18:19:08Z pjf $
+# @(#)$Id: Build.PL 165 2011-02-22 13:04:09Z pjf $
 
 use strict;
 use warnings;
@@ -6,16 +6,16 @@ use warnings;
 use English qw(-no_match_vars);
 
 sub testing { !! ($ENV{AUTOMATED_TESTING} || $ENV{PERL_CR_SMOKER_CURRENT}
-              || ($ENV{PERL5OPT} || q()) =~ m{ CPAN-Reporter }mx
-              || ($ENV{PERL5LIB} || q()) =~ m{ \A /home/sand }mx) }
+              || ($ENV{PERL5OPT} || q()) =~ m{ CPAN-Reporter }mx) }
 
 sub whimper { print {*STDOUT} $_[ 0 ]."\n"; exit 0 }
 
 BEGIN {
    eval { require 5.008; }; $EVAL_ERROR and whimper 'Perl minimum 5.8';
+   $ENV{PATH}   =~ m{ \A /home/sand }mx and whimper 'Stopped Konig';
 }
 
-use version; our $VERSION = qv( sprintf '0.6.%d', q$Rev: 164 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.6.%d', q$Rev: 165 $ =~ /\d+/gmx );
 
 use Module::Build;
 
