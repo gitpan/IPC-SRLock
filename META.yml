@@ -9,7 +9,8 @@ build_requires:
 configure_requires:
   Module::Build: 0.32
   version: 0.74
-generated_by: 'Module::Build version 0.3607'
+dynamic_config: 1
+generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.110580'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -17,23 +18,25 @@ meta-spec:
 name: IPC-SRLock
 no_index:
   directory:
+    - examples
+    - inc
     - t
 provides:
   IPC::SRLock:
     file: lib/IPC/SRLock.pm
-    version: 0.6.165
+    version: v0.6.174
   IPC::SRLock::Exception:
     file: lib/IPC/SRLock/Exception.pm
-    version: 0.6.164
+    version: v0.6.164
   IPC::SRLock::Fcntl:
     file: lib/IPC/SRLock/Fcntl.pm
-    version: 0.6.164
+    version: v0.6.164
   IPC::SRLock::Memcached:
     file: lib/IPC/SRLock/Memcached.pm
-    version: 0.6.164
+    version: v0.6.164
   IPC::SRLock::Sysv:
     file: lib/IPC/SRLock/Sysv.pm
-    version: 0.6.164
+    version: v0.6.164
 requires:
   Cache::Memcached: 1.24
   Class::Accessor::Fast: 0.31
@@ -55,5 +58,7 @@ requires:
   perl: 5.008
   version: 0.74
 resources:
+  bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=IPC-SRLock
+  homepage: http://www.roxsoft.co.uk
   license: http://dev.perl.org/licenses/
-version: 0.6.165
+version: 0.6.174

@@ -1,8 +1,8 @@
-# @(#)$Id: 10base.t 164 2010-12-18 18:19:08Z pjf $
+# @(#)$Id: 10base.t 171 2011-03-24 19:54:50Z pjf $
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.6.%d', q$Rev: 164 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.6.%d', q$Rev: 171 $ =~ /\d+/gmx );
 use File::Spec::Functions;
 use FindBin qw( $Bin );
 use lib catdir( $Bin, updir, q(lib) );
@@ -16,7 +16,7 @@ BEGIN {
    my $current = eval { Module::Build->current };
 
    $current and $current->notes->{stop_tests}
-            and plan skip_all => q(CPAN Testing stopped);
+            and plan skip_all => $current->notes->{stop_tests};
 
    plan tests => 7;
 }

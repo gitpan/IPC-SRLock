@@ -1,17 +1,19 @@
 Build.PL
 Changes
+inc/Bob.pm
 lib/IPC/SRLock.pm
 lib/IPC/SRLock/Exception.pm
 lib/IPC/SRLock/Fcntl.pm
 lib/IPC/SRLock/Memcached.pm
 lib/IPC/SRLock/Sysv.pm
+LICENSE
 MANIFEST			This list of files
+META.json
+META.yml
+README
 t/01always_pass.t
 t/02pod.t
 t/03podcoverage.t
 t/05kwalitee.t
 t/10base.t
-README
-LICENSE
-META.yml
 SIGNATURE    Added here by Module::Build

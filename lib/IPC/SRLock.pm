@@ -1,10 +1,10 @@
-# @(#)$Id: SRLock.pm 165 2011-02-22 13:04:09Z pjf $
+# @(#)$Id: SRLock.pm 174 2011-04-12 19:20:03Z pjf $
 
 package IPC::SRLock;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.6.%d', q$Rev: 165 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.6.%d', q$Rev: 174 $ =~ /\d+/gmx );
 use parent qw(Class::Accessor::Fast);
 
 use Class::MOP;
@@ -185,7 +185,7 @@ IPC::SRLock - Set/reset locking semantics to single thread processes
 
 =head1 Version
 
-0.6.$Revision: 165 $
+0.6.$Revision: 174 $
 
 =head1 Synopsis
 
@@ -406,3 +406,4 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE
 # mode: perl
 # tab-width: 3
 # End:
+
