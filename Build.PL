@@ -1,13 +1,12 @@
-# @(#)$Id: Build.PL 172 2011-03-24 20:25:07Z pjf $
+# @(#)$Id: Build.PL 175 2011-11-08 03:12:04Z pjf $
 
 use strict;
 use warnings;
 use inc::Bob; # Module::Build subclass
-use version; our $VERSION = qv( sprintf '0.6.%d', q$Rev: 172 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.6.%d', q$Rev: 175 $ =~ /\d+/gmx );
 
 Bob->new( {
    stop_tests => 1,
-   license    => q(perl),
    module     => q(IPC::SRLock),
    home_page  => q(http://www.roxsoft.co.uk),
    requires   => {

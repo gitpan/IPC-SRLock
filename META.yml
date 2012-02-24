@@ -10,7 +10,7 @@ configure_requires:
   Module::Build: 0.32
   version: 0.74
 dynamic_config: 1
-generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.110580'
+generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.112621'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -24,7 +24,7 @@ no_index:
 provides:
   IPC::SRLock:
     file: lib/IPC/SRLock.pm
-    version: v0.6.174
+    version: v0.6.176
   IPC::SRLock::Exception:
     file: lib/IPC/SRLock/Exception.pm
     version: v0.6.164
@@ -61,4 +61,4 @@ resources:
   bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=IPC-SRLock
   homepage: http://www.roxsoft.co.uk
   license: http://dev.perl.org/licenses/
-version: 0.6.174
+version: 0.6.176

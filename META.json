@@ -4,7 +4,7 @@
       "Peter Flanigan, C<< <Support at RoxSoft.co.uk> >>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.38, CPAN::Meta::Converter version 2.110580",
+   "generated_by" : "Module::Build version 0.38, CPAN::Meta::Converter version 2.112621",
    "license" : [
       "perl_5"
    ],
@@ -61,7 +61,7 @@
    "provides" : {
       "IPC::SRLock" : {
          "file" : "lib/IPC/SRLock.pm",
-         "version" : "v0.6.174"
+         "version" : "v0.6.176"
       },
       "IPC::SRLock::Exception" : {
          "file" : "lib/IPC/SRLock/Exception.pm",
@@ -90,5 +90,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.6.174"
+   "version" : "0.6.176"
 }
