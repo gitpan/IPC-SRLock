@@ -1,9 +1,9 @@
-# @(#)$Id: Build.PL 178 2012-03-24 08:33:53Z pjf $
+# @(#)$Id: Build.PL 179 2012-03-24 17:16:16Z pjf $
 
 use strict;
 use warnings;
 use inc::Bob; # Module::Build subclass
-use version; our $VERSION = qv( sprintf '0.6.%d', q$Rev: 178 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.6.%d', q$Rev: 179 $ =~ /\d+/gmx );
 
 Bob->new( {
    module     => q(IPC::SRLock),
@@ -22,6 +22,7 @@ Bob->new( {
       'IO::File'              => 1.14,
       'IPC::ShareLite'        => 0.17,
       'List::Util'            => 1.19,
+      'Moose'                 => 2.0402,
       'Storable'              => 2.15,
       'Time::Elapsed'         => 0.10,
       'Time::HiRes'           => 1.9711,
