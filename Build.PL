@@ -1,12 +1,11 @@
-# @(#)$Id: Build.PL 175 2011-11-08 03:12:04Z pjf $
+# @(#)$Id: Build.PL 178 2012-03-24 08:33:53Z pjf $
 
 use strict;
 use warnings;
 use inc::Bob; # Module::Build subclass
-use version; our $VERSION = qv( sprintf '0.6.%d', q$Rev: 175 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.6.%d', q$Rev: 178 $ =~ /\d+/gmx );
 
 Bob->new( {
-   stop_tests => 1,
    module     => q(IPC::SRLock),
    home_page  => q(http://www.roxsoft.co.uk),
    requires   => {
@@ -15,7 +14,6 @@ Bob->new( {
       'version'               => 0.74,
       'Cache::Memcached'      => 1.24,
       'Class::Accessor::Fast' => 0.31,
-      'Class::MOP'            => 0.84,
       'Class::Null'           => 1.09,
       'Data::Serializer'      => 0.46,
       'Date::Format'          => 2.22,
@@ -24,7 +22,6 @@ Bob->new( {
       'IO::File'              => 1.14,
       'IPC::ShareLite'        => 0.17,
       'List::Util'            => 1.19,
-      'MRO::Compat'           => 0.11,
       'Storable'              => 2.15,
       'Time::Elapsed'         => 0.10,
       'Time::HiRes'           => 1.9711,

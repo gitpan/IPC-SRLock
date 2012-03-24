@@ -38,7 +38,6 @@
          "requires" : {
             "Cache::Memcached" : "1.24",
             "Class::Accessor::Fast" : "0.31",
-            "Class::MOP" : "0.84",
             "Class::Null" : "1.09",
             "Data::Serializer" : "0.46",
             "Date::Format" : "2.22",
@@ -47,7 +46,6 @@
             "IO::File" : "1.14",
             "IPC::ShareLite" : "0.17",
             "List::Util" : "1.19",
-            "MRO::Compat" : "0.11",
             "Storable" : "2.15",
             "Time::Elapsed" : "0.1",
             "Time::HiRes" : "1.9711",
@@ -61,7 +59,7 @@
    "provides" : {
       "IPC::SRLock" : {
          "file" : "lib/IPC/SRLock.pm",
-         "version" : "v0.6.176"
+         "version" : "v0.6.178"
       },
       "IPC::SRLock::Exception" : {
          "file" : "lib/IPC/SRLock/Exception.pm",
@@ -69,7 +67,7 @@
       },
       "IPC::SRLock::Fcntl" : {
          "file" : "lib/IPC/SRLock/Fcntl.pm",
-         "version" : "v0.6.164"
+         "version" : "v0.6.178"
       },
       "IPC::SRLock::Memcached" : {
          "file" : "lib/IPC/SRLock/Memcached.pm",
@@ -90,5 +88,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.6.176"
+   "version" : "0.6.178"
 }

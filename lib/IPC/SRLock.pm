@@ -1,10 +1,10 @@
-# @(#)$Id: SRLock.pm 176 2012-02-24 11:14:52Z pjf $
+# @(#)$Id: SRLock.pm 178 2012-03-24 08:33:53Z pjf $
 
 package IPC::SRLock;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.6.%d', q$Rev: 176 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.6.%d', q$Rev: 178 $ =~ /\d+/gmx );
 use parent qw(Class::Accessor::Fast);
 
 use Class::MOP;
@@ -185,7 +185,7 @@ IPC::SRLock - Set/reset locking semantics to single thread processes
 
 =head1 Version
 
-0.6.$Revision: 176 $
+0.6.$Revision: 178 $
 
 =head1 Synopsis
 
@@ -373,7 +373,7 @@ the lock record at the debug level
 
 =head1 Incompatibilities
 
-The B<sysv> subclass will not work on cygwin
+The B<sysv> subclass will not work on MSWin32 and cygwin platforms
 
 =head1 Bugs and Limitations
 

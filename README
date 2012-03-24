@@ -2,7 +2,7 @@ Name
     IPC::SRLock - Set/reset locking semantics to single thread processes
 
 Version
-    0.6.$Revision: 176 $
+    0.6.$Revision: 178 $
 
 Synopsis
        use IPC::SRLock;
@@ -137,7 +137,7 @@ Dependencies
     Time::Elapsed
 
 Incompatibilities
-    The sysv subclass will not work on cygwin
+    The sysv subclass will not work on MSWin32 and cygwin platforms
 
 Bugs and Limitations
     Testing of the memcached subclass is skipped on all platforms as it
