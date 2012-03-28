@@ -1,6 +1,7 @@
 Build.PL
 Changes
 inc/Bob.pm
+inc/CPANTesting.pm
 lib/IPC/SRLock.pm
 lib/IPC/SRLock/Exception.pm
 lib/IPC/SRLock/Fcntl.pm
