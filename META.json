@@ -52,7 +52,7 @@
             "Time::HiRes" : "1.9711",
             "Try::Tiny" : "0.06",
             "parent" : "0.221",
-            "perl" : "5.008",
+            "perl" : "5.01",
             "version" : "0.74"
          }
       }
@@ -60,23 +60,23 @@
    "provides" : {
       "IPC::SRLock" : {
          "file" : "lib/IPC/SRLock.pm",
-         "version" : "v0.6.181"
+         "version" : "v0.7.185"
       },
       "IPC::SRLock::Exception" : {
          "file" : "lib/IPC/SRLock/Exception.pm",
-         "version" : "v0.6.164"
+         "version" : "v0.7.183"
       },
       "IPC::SRLock::Fcntl" : {
          "file" : "lib/IPC/SRLock/Fcntl.pm",
-         "version" : "v0.6.178"
+         "version" : "v0.7.183"
       },
       "IPC::SRLock::Memcached" : {
          "file" : "lib/IPC/SRLock/Memcached.pm",
-         "version" : "v0.6.164"
+         "version" : "v0.7.183"
       },
       "IPC::SRLock::Sysv" : {
          "file" : "lib/IPC/SRLock/Sysv.pm",
-         "version" : "v0.6.164"
+         "version" : "v0.7.183"
       }
    },
    "release_status" : "stable",
@@ -89,5 +89,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.6.181"
+   "version" : "0.7.185"
 }

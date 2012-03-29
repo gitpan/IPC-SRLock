@@ -1,10 +1,10 @@
-# @(#)$Id: Fcntl.pm 178 2012-03-24 08:33:53Z pjf $
+# @(#)$Id: Fcntl.pm 183 2012-03-29 00:26:05Z pjf $
 
 package IPC::SRLock::Fcntl;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.6.%d', q$Rev: 178 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.7.%d', q$Rev: 183 $ =~ /\d+/gmx );
 use parent qw(IPC::SRLock);
 
 use Data::Serializer;
@@ -171,7 +171,7 @@ IPC::SRLock::Fcntl - Set/reset locks using fcntl
 
 =head1 Version
 
-0.6.$Revision: 178 $
+0.7.$Revision: 183 $
 
 =head1 Synopsis
 

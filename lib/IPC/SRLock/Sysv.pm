@@ -1,10 +1,10 @@
-# @(#)$Id: Sysv.pm 164 2010-12-18 18:19:08Z pjf $
+# @(#)$Id: Sysv.pm 183 2012-03-29 00:26:05Z pjf $
 
 package IPC::SRLock::Sysv;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.6.%d', q$Rev: 164 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.7.%d', q$Rev: 183 $ =~ /\d+/gmx );
 use parent qw(IPC::SRLock);
 
 use English        qw(-no_match_vars);
@@ -153,7 +153,7 @@ IPC::SRLock::Sysv - Set/reset locks using semop and shmop
 
 =head1 Version
 
-0.6.$Revision: 164 $
+0.7.$Revision: 183 $
 
 =head1 Synopsis
 
