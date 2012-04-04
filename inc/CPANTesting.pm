@@ -1,4 +1,4 @@
-# @(#)$Id: CPANTesting.pm 185 2012-03-29 11:46:21Z pjf $
+# @(#)$Id: CPANTesting.pm 186 2012-04-03 11:26:33Z pjf $
 
 package CPANTesting;
 
@@ -9,14 +9,12 @@ my $uname = qx(uname -a);
 
 sub broken_toolchain {
    $ENV{PATH} =~ m{ \A /home/sand }mx and return 'Stopped Konig';
-   $uname     =~ m{ bandsman      }mx and return 'Stopped Horne';
+   $uname     =~ m{ higgsboson    }mx and return 'Stopped dcollins';
    return 0;
 }
 
 sub exceptions {
-   $uname =~ m{ higgsboson    }mx and return 'Stopped dcollins';
-   $uname =~ m{ profvince.com }mx and return 'Stopped vpit';
-   $uname =~ m{ slack64       }mx and return 'Stopped bingos';
+   $uname =~ m{ slack64 }mx and return 'Stopped bingos';
    return 0;
 }
 

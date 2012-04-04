@@ -2,7 +2,7 @@ Name
     IPC::SRLock - Set/reset locking semantics to single thread processes
 
 Version
-    0.7.$Revision: 185 $
+    0.7.$Revision: 188 $
 
 Synopsis
        use IPC::SRLock;

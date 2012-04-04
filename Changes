@@ -1,5 +1,9 @@
 Revision history for IPC::SRLock
 
+0.7.188 - 2012-04-04
+        - Stopped CPAN testing, no point in allowing it to continue
+        - Updated inc::CPANTesting
+
 0.7.185 - 2012-03-29
         - Updated inc::Bob to 1.2
         - Upped min Perl ver to 5.10

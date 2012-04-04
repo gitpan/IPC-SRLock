@@ -60,7 +60,7 @@
    "provides" : {
       "IPC::SRLock" : {
          "file" : "lib/IPC/SRLock.pm",
-         "version" : "v0.7.185"
+         "version" : "v0.7.188"
       },
       "IPC::SRLock::Exception" : {
          "file" : "lib/IPC/SRLock/Exception.pm",
@@ -89,5 +89,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.7.185"
+   "version" : "0.7.188"
 }
