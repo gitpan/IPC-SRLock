@@ -1,4 +1,4 @@
-# @(#)$Id: Bob.pm 185 2012-03-29 11:46:21Z pjf $
+# @(#)$Id: Bob.pm 194 2012-08-05 19:20:11Z pjf $
 
 package Bob;
 
@@ -8,70 +8,79 @@ use inc::CPANTesting;
 
 sub whimper { print {*STDOUT} $_[ 0 ]."\n"; exit 0 }
 
-BEGIN {
-   my $reason; $reason = CPANTesting::broken_toolchain and whimper $reason;
-}
+BEGIN { my $reason; $reason = CPANTesting::should_abort and whimper $reason; }
 
-use version; our $VERSION = qv( '1.2' );
+use version; our $VERSION = qv( '1.4' );
 
 use File::Spec::Functions;
 use Module::Build;
 
 sub new {
-   my ($class, $params) = @_; $params ||= {}; $params->{requires} ||= {};
+   my ($class, $p) = @_; $p ||= {}; $p->{requires} ||= {};
 
-   my $perl_ver   = $params->{requires}->{perl} || 5.008_008;
+   my $perl_ver    = $p->{requires}->{perl} || 5.008_008;
 
    $] < $perl_ver and whimper "Perl minimum ${perl_ver}";
 
-   my $module     = $params->{module} or whimper 'No module name';
-   my $distname   = $module; $distname =~ s{ :: }{-}gmx;
-   my $class_path = catfile( q(lib), split m{ :: }mx, $module.q(.pm) );
-   my $sub_class  = Module::Build->subclass( code => q{
+   my $module      = $p->{module} or whimper 'No module name';
+   my $distname    = $module; $distname =~ s{ :: }{-}gmx;
+   my $class_path  = catfile( q(lib), split m{ :: }mx, $module.q(.pm) );
+
+   return __get_build_class( $p )->new
+      ( add_to_cleanup     => __get_cleanup_list( $p, $distname ),
+        build_requires     => $p->{build_requires},
+        configure_requires => $p->{configure_requires},
+        create_license     => 1,
+        create_packlist    => 0,
+        create_readme      => 1,
+        dist_version_from  => $class_path,
+        license            => $p->{license} || q(perl),
+        meta_merge         => __get_resources( $p, $distname ),
+        module_name        => $module,
+        no_index           => __get_no_index( $p ),
+        notes              => __get_notes( $p ),
+        recommends         => $p->{recommends},
+        requires           => $p->{requires},
+        sign               => defined $p->{sign} ? $p->{sign} : 1, );
+}
+
+# Private functions
+
+sub __get_build_class { # Which subclass of M::B should we create?
+   my $p = shift; exists $p->{build_class} and return $p->{build_class};
+
+   return Module::Build->subclass( code => q{
+      use Pod::Select;
+
       sub ACTION_distmeta {
-         my $self = shift; use Pod::Select;
+         my $self = shift;
 
          $self->notes->{create_readme_pod} and podselect( {
             -output => q(README.pod) }, $self->dist_version_from );
 
          return $self->SUPER::ACTION_distmeta;
-      } }, );
-
-   return $sub_class->new
-      ( add_to_cleanup     => [ q(Debian_CPANTS.txt), $distname.q(-*),
-                                map { ( q(*/) x $_ ).q(*~) } 0..5 ],
-        build_requires     => $params->{build_requires},
-        configure_requires => $params->{configure_requires},
-        create_license     => 1,
-        create_packlist    => 0,
-        create_readme      => 1,
-        dist_version_from  => $class_path,
-        license            => $params->{license} || q(perl),
-        meta_merge         => __get_resources( $params, $distname ),
-        module_name        => $module,
-        no_index           => __get_no_index( $params ),
-        notes              => __get_notes( $params ),
-        recommends         => $params->{recommends},
-        requires           => $params->{requires},
-        sign               => defined $params->{sign} ? $params->{sign} : 1, );
+      }
+   } );
 }
 
-# Private subroutines
+sub __get_cleanup_list {
+   my $p = shift; my $distname = shift;
 
-sub __cpan_testing { !! ($ENV{AUTOMATED_TESTING} || $ENV{PERL_CR_SMOKER_CURRENT}
-                     || ($ENV{PERL5OPT} || q()) =~ m{ CPAN-Reporter }mx) }
+   return [ q(Debian_CPANTS.txt), "${distname}-*",
+            map { ( q(*/) x $_ ).q(*~) } 0..5 ];
+}
 
 sub __get_no_index {
-   my $params = shift;
+   my $p = shift;
 
-   return { directory => $params->{no_index_dir} || [ qw(examples inc t) ] };
+   return { directory => $p->{no_index_dir} || [ qw(examples inc t) ] };
 }
 
 sub __get_notes {
-   my $params = shift; my $notes = $params->{notes} || {};
+   my $p = shift; my $notes = exists $p->{notes} ? $p->{notes} : {};
 
-   $notes->{create_readme_pod} = $params->{create_readme_pod} || 0;
-   $notes->{stop_tests       } = __stop_tests( $params );
+   $notes->{create_readme_pod} = $p->{create_readme_pod} || 0;
+   $notes->{stop_tests} = CPANTesting::test_exceptions( $p );
 
    return $notes;
 }
@@ -88,30 +97,22 @@ sub __get_repository {
 }
 
 sub __get_resources {
-   my $params     = shift;
-   my $distname   = shift;
-   my $tracker    = defined $params->{bugtracker}
-                  ? $params->{bugtracker}
-                  : q(http://rt.cpan.org/NoAuth/Bugs.html?Dist=);
-   my $resources  = $params->{resources} || {};
+   my $p         = shift;
+   my $distname  = shift;
+   my $tracker   = defined $p->{bugtracker}
+                 ? $p->{bugtracker}
+                 : q(http://rt.cpan.org/NoAuth/Bugs.html?Dist=);
+   my $resources = $p->{resources} || {};
    my $repo;
 
    $tracker and $resources->{bugtracker} = $tracker.$distname;
-   $params->{home_page} and $resources->{homepage} = $params->{home_page};
+   $p->{home_page} and $resources->{homepage} = $p->{home_page};
    $resources->{license} ||= q(http://dev.perl.org/licenses/);
 
    -f q(MANIFEST.SKIP) and $repo = __get_repository
       and $resources->{repository} = $repo;
 
    return { resources => $resources };
-}
-
-sub __stop_tests {
-   my $params = shift; __cpan_testing() or return 0;
-
-   $params->{stop_tests} and return 'CPAN Testing stopped';
-
-   return CPANTesting::exceptions;
 }
 
 1;

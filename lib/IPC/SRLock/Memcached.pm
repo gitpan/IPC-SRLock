@@ -1,10 +1,10 @@
-# @(#)$Id: Memcached.pm 183 2012-03-29 00:26:05Z pjf $
+# @(#)$Id: Memcached.pm 194 2012-08-05 19:20:11Z pjf $
 
 package IPC::SRLock::Memcached;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.7.%d', q$Rev: 183 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.8.%d', q$Rev: 194 $ =~ /\d+/gmx );
 use parent qw(IPC::SRLock);
 
 use Cache::Memcached;
@@ -147,7 +147,7 @@ IPC::SRLock::Memcached - Set/reset locks using libmemcache
 
 =head1 Version
 
-0.7.$Revision: 183 $
+0.8.$Revision: 194 $
 
 =head1 Synopsis
 
