@@ -1,10 +1,10 @@
-# @(#)$Id: Memcached.pm 194 2012-08-05 19:20:11Z pjf $
+# @(#)$Id: Memcached.pm 195 2012-09-05 14:09:51Z pjf $
 
 package IPC::SRLock::Memcached;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.8.%d', q$Rev: 194 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.8.%d', q$Rev: 195 $ =~ /\d+/gmx );
 use parent qw(IPC::SRLock);
 
 use Cache::Memcached;
@@ -147,7 +147,7 @@ IPC::SRLock::Memcached - Set/reset locks using libmemcache
 
 =head1 Version
 
-0.8.$Revision: 194 $
+0.8.$Revision: 195 $
 
 =head1 Synopsis
 
@@ -167,19 +167,19 @@ This class defines accessors and mutators for these attributes:
 
 =over 3
 
-=item lockfile
+=item C<lockfile>
 
 Name of the key to the lock file record. Defaults to I<_lockfile>
 
-=item memd
+=item C<memd>
 
 An instance of L<Cache::Memcached> with it's namespace set to I<ipc_srlock>
 
-=item servers
+=item C<servers>
 
 An array ref of servers to connect to. Defaults to I<localhost:11211>
 
-=item shmfile
+=item C<shmfile>
 
 Name of the key to the lock table record. Defaults to I<_shmfile>
 
@@ -237,7 +237,7 @@ Peter Flanigan, C<< <Support at RoxSoft.co.uk> >>
 
 =head1 License and Copyright
 
-Copyright (c) 2008 Peter Flanigan. All rights reserved
+Copyright (c) 2012 Peter Flanigan. All rights reserved
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself. See L<perlartistic>

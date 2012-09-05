@@ -1,10 +1,10 @@
-# @(#)$Id: Exception.pm 194 2012-08-05 19:20:11Z pjf $
+# @(#)$Id: Exception.pm 195 2012-09-05 14:09:51Z pjf $
 
 package IPC::SRLock::Exception;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.8.%d', q$Rev: 194 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.8.%d', q$Rev: 195 $ =~ /\d+/gmx );
 
 use Exception::Class
    'IPC::SRLock::Exception::Base' => { fields => [qw(args out rv)] };
@@ -97,7 +97,7 @@ IPC::SRLock::Exception - Exception class
 
 =head1 Version
 
-0.8.$Revision: 194 $
+0.8.$Revision: 195 $
 
 =head1 Synopsis
 
@@ -188,7 +188,7 @@ Peter Flanigan, C<< <Support at RoxSoft.co.uk> >>
 
 =head1 License and Copyright
 
-Copyright (c) 2010 Peter Flanigan. All rights reserved
+Copyright (c) 2012 Peter Flanigan. All rights reserved
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself. See L<perlartistic>

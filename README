@@ -2,7 +2,7 @@ Name
     IPC::SRLock - Set/reset locking semantics to single thread processes
 
 Version
-    0.8.$Revision: 194 $
+    0.8.$Revision: 195 $
 
 Synopsis
        use IPC::SRLock;
@@ -24,32 +24,32 @@ Description
 Configuration and Environment
     This class defines accessors and mutators for these attributes:
 
-    debug
+    "debug"
        Turns on debug output. Defaults to 0
 
-    log
+    "log"
        If set to a log object, it's "debug" method is called if debugging is
        turned on. Defaults to Class::Null
 
-    name
+    "name"
        Used as the lock file names. Defaults to *ipc_srlock*
 
-    nap_time
+    "nap_time"
        How long to wait between polls of the lock table. Defaults to 0.5
        seconds
 
-    patience
+    "patience"
        Time in seconds to wait for a lock before giving up. If set to 0
        waits forever. Defaults to 0
 
-    pid
+    "pid"
        The process id doing the locking. Defaults to this processes id
 
-    time_out
+    "time_out"
        Time in seconds before a lock is deemed to have expired. Defaults to
        300
 
-    type
+    "type"
        Determines which factory subclass is loaded. Defaults to *fcntl*
 
 Subroutines/Methods
@@ -106,11 +106,6 @@ Subroutines/Methods
 
     Require the requested class, throw an error if it doesn't load
 
-  __hash_merge
-       my $hash = __hash_merge( { key1 => val1 }, { key2 => val2 } );
-
-    Simplistic merging of two hashes
-
   _init
     Called by the constructor. Optionally overridden in the factory
     subclass. This allows subclass specific initialisation
@@ -124,8 +119,13 @@ Subroutines/Methods
   _set
     Should be overridden in the factory subclass
 
+  __hash_merge
+       my $hash = __hash_merge( { key1 => val1 }, { key2 => val2 } );
+
+    Simplistic merging of two hashes
+
 Diagnostics
-    Setting debug to true will cause the "set" methods to log the lock
+    Setting "debug" to true will cause the "set" methods to log the lock
     record at the debug level
 
 Dependencies
@@ -137,7 +137,7 @@ Dependencies
     Time::Elapsed
 
 Incompatibilities
-    The sysv subclass will not work on MSWin32 and cygwin platforms
+    The "Sysv" subclass will not work on "MSWin32" and "cygwin" platforms
 
 Bugs and Limitations
     Testing of the memcached subclass is skipped on all platforms as it

@@ -1,10 +1,10 @@
-# @(#)$Id: Sysv.pm 194 2012-08-05 19:20:11Z pjf $
+# @(#)$Id: Sysv.pm 195 2012-09-05 14:09:51Z pjf $
 
 package IPC::SRLock::Sysv;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.8.%d', q$Rev: 194 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.8.%d', q$Rev: 195 $ =~ /\d+/gmx );
 use parent qw(IPC::SRLock);
 
 use English        qw(-no_match_vars);
@@ -149,11 +149,11 @@ __END__
 
 =head1 Name
 
-IPC::SRLock::Sysv - Set/reset locks using semop and shmop
+IPC::SRLock::Sysv - Set/reset locks using System V IPC
 
 =head1 Version
 
-0.8.$Revision: 194 $
+0.8.$Revision: 195 $
 
 =head1 Synopsis
 
@@ -173,15 +173,15 @@ This class defines accessors and mutators for these attributes:
 
 =over 3
 
-=item lockfile
+=item C<lockfile>
 
 The key the the semaphore. Defaults to 12_244_237
 
-=item mode
+=item C<mode>
 
 Mode to create the shared memory file. Defaults to 0666
 
-=item size
+=item C<size>
 
 Maximum size of a shared memory segment. Defaults to 65_536
 
@@ -241,7 +241,7 @@ Peter Flanigan, C<< <Support at RoxSoft.co.uk> >>
 
 =head1 License and Copyright
 
-Copyright (c) 2008 Peter Flanigan. All rights reserved
+Copyright (c) 2012 Peter Flanigan. All rights reserved
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself. See L<perlartistic>
