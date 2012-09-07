@@ -1,8 +1,8 @@
-# @(#)$Id: 10base.t 194 2012-08-05 19:20:11Z pjf $
+# @(#)$Id: 10base.t 198 2012-09-07 12:41:55Z pjf $
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.8.%d', q$Rev: 194 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.8.%d', q$Rev: 198 $ =~ /\d+/gmx );
 use File::Spec::Functions qw(catdir catfile tmpdir updir);
 use FindBin qw( $Bin );
 use lib catdir( $Bin, updir, q(lib) );
@@ -61,6 +61,9 @@ unless ($OSNAME eq q(MSWin32) or $OSNAME eq q(cygwin)) {
 
    ok ! (first { $_ eq $PROGRAM_NAME }
          map   { $_->{key} } @{ $lock->list() }), 'Reset ipc';
+
+   qx{ ipcrm -M 0x00bad50d };
+   qx{ ipcrm -S 0x00bad50d };
 }
 
 # Need a memcached server to run these tests

@@ -1,4 +1,4 @@
-# @(#)$Id: CPANTesting.pm 197 2012-09-06 14:03:51Z pjf $
+# @(#)$Id: CPANTesting.pm 198 2012-09-07 12:41:55Z pjf $
 
 package CPANTesting;
 
@@ -20,6 +20,7 @@ sub test_exceptions {
    $osname eq q(mirbsd)      and return 'Mirbsd  OS unsupported';
    $osname eq q(mswin32)     and return 'MSWin32 OS unsupported';
    $uname  =~ m{ slack64 }mx and return 'Stopped Bingos slack64';
+   $uname  =~ m{ falco   }mx and return 'Stopped Bingos falco';
    return 0;
 }
 
