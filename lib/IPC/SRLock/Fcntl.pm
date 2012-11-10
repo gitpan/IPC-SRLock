@@ -1,10 +1,10 @@
-# @(#)$Id: Fcntl.pm 195 2012-09-05 14:09:51Z pjf $
+# @(#)$Id: Fcntl.pm 200 2012-11-10 06:04:36Z pjf $
 
 package IPC::SRLock::Fcntl;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.8.%d', q$Rev: 195 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.8.%d', q$Rev: 200 $ =~ /\d+/gmx );
 use parent qw(IPC::SRLock);
 
 use Data::Serializer;
@@ -68,11 +68,10 @@ sub _list {
 }
 
 sub _read_shmfile {
-   my $self = shift; my ($e, $lock, $ref);
-
-   umask $self->umask;
+   my $self = shift; my $old_umask = umask $self->umask; my ($e, $lock, $ref);
 
    unless ($lock = IO::File->new( $self->lockfile, q(w), $self->mode )) {
+      umask $old_umask;
       $self->throw( error => 'Path [_1] cannot open for writing',
                     args  => [ $self->lockfile ] );
    }
@@ -81,10 +80,11 @@ sub _read_shmfile {
 
    if (-f $self->shmfile) {
       try   { $ref = $self->serializer->retrieve( $self->shmfile ) }
-      catch { $self->_release( $lock ); $self->throw( $_ ) };
+      catch { umask $old_umask; $self->_release( $lock ); $self->throw( $_ ) };
    }
    else { $ref = {} }
 
+   umask $old_umask;
    return ($lock, $ref);
 }
 
@@ -171,7 +171,7 @@ IPC::SRLock::Fcntl - Set/reset locks using fcntl
 
 =head1 Version
 
-0.8.$Revision: 195 $
+0.8.$Revision: 200 $
 
 =head1 Synopsis
 

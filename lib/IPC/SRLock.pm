@@ -1,10 +1,10 @@
-# @(#)$Id: SRLock.pm 199 2012-09-07 12:42:38Z pjf $
+# @(#)$Id: SRLock.pm 200 2012-11-10 06:04:36Z pjf $
 
 package IPC::SRLock;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.8.%d', q$Rev: 199 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.8.%d', q$Rev: 200 $ =~ /\d+/gmx );
 use parent qw(Class::Accessor::Fast);
 
 use Class::MOP;
@@ -51,7 +51,7 @@ sub get_table {
                              stime => 'right',
                              tleft => 'right'},
                  count  => $count,
-                 flds   => [ qw(id pid stime tleft) ],
+                 fields => [ qw(id pid stime tleft) ],
                  hclass => { id => q(most) },
                  labels => { id    => 'Key',
                              pid   => 'PID',
@@ -60,18 +60,18 @@ sub get_table {
                  values => [] };
 
    for my $lock (@{ $self->list }) {
-      my $flds = {};
+      my $fields = {};
 
-      $flds->{id   } = $lock->{key};
-      $flds->{pid  } = $lock->{pid};
-      $flds->{stime} = time2str( q(%Y-%m-%d %H:%M:%S), $lock->{stime} );
+      $fields->{id   } = $lock->{key};
+      $fields->{pid  } = $lock->{pid};
+      $fields->{stime} = time2str( q(%Y-%m-%d %H:%M:%S), $lock->{stime} );
 
       my $tleft = $lock->{stime} + $lock->{timeout} - time;
 
-      $flds->{tleft} = $tleft > 0 ? elapsed( $tleft ) : 'Expired';
-      $flds->{class}->{tleft}
-                     = $tleft < 1 ? q(error dataValue) : q(odd dataValue);
-      push @{ $data->{values} }, $flds;
+      $fields->{tleft} = $tleft > 0 ? elapsed( $tleft ) : 'Expired';
+      $fields->{class}->{tleft}
+                       = $tleft < 1 ? q(error dataValue) : q(odd dataValue);
+      push @{ $data->{values} }, $fields;
       $count++;
    }
 
@@ -185,7 +185,7 @@ IPC::SRLock - Set/reset locking semantics to single thread processes
 
 =head1 Version
 
-0.8.$Revision: 199 $
+0.8.$Revision: 200 $
 
 =head1 Synopsis
 
