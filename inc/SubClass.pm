@@ -1,4 +1,4 @@
-# @(#)$Id: SubClass.pm 203 2012-11-13 20:31:44Z pjf $
+# @(#)$Id: SubClass.pm 205 2012-11-13 20:46:44Z pjf $
 # Bob-Version: 1.7
 
 use Pod::Select;
@@ -10,4 +10,15 @@ sub ACTION_distmeta {
       -output => q(README.pod) }, $self->dist_version_from );
 
    return $self->SUPER::ACTION_distmeta;
+}
+
+sub _normalize_prereqs {
+   my $self = shift; my $osname = lc $^O;
+
+   my $prereqs = $self->SUPER::_normalize_prereqs;
+
+   ($osname eq 'mswin32' or $osname eq 'cygwin')
+      and delete $prereqs->{requires}->{ 'IPC::ShareLite' };
+
+   return $prereqs;
 }
