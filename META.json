@@ -30,7 +30,7 @@
       },
       "configure" : {
          "requires" : {
-            "Module::Build" : "0.32",
+            "Module::Build" : "0.38",
             "version" : "0.74"
          }
       },
@@ -62,7 +62,7 @@
    "provides" : {
       "IPC::SRLock" : {
          "file" : "lib/IPC/SRLock.pm",
-         "version" : "v0.8.200"
+         "version" : "v0.8.201"
       },
       "IPC::SRLock::Exception" : {
          "file" : "lib/IPC/SRLock/Exception.pm",
@@ -91,5 +91,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.8.200"
+   "version" : "0.8.201"
 }
