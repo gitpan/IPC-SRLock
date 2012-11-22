@@ -1,10 +1,10 @@
-# @(#)$Id: Fcntl.pm 200 2012-11-10 06:04:36Z pjf $
+# @(#)$Id: Fcntl.pm 206 2012-11-22 04:50:59Z pjf $
 
 package IPC::SRLock::Fcntl;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.8.%d', q$Rev: 200 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.8.%d', q$Rev: 206 $ =~ /\d+/gmx );
 use parent qw(IPC::SRLock);
 
 use Data::Serializer;
@@ -35,14 +35,14 @@ sub _init {
 
    unless ($self->lockfile) {
       $path = catfile( $self->tempdir, $self->name.q(.lck) );
-      $self->lockfile( $path =~ m{ \A ([ \-\.\/\\\w.]+) \z }mx ? $1 : q() );
+      $self->lockfile( $path =~ m{ \A ([ \:\-\.\/\\\w.]+) \z }mx ? $1 : q() );
       $self->lockfile or $self->throw( error => 'Path [_1] cannot untaint',
                                        args  => [ $self->lockfile ] );
    }
 
    unless ($self->shmfile) {
       $path = catfile( $self->tempdir, $self->name.q(.shm) );
-      $self->shmfile( $path =~ m{ \A ([ \-\.\/\\\w.]+) \z }mx ? $1 : q() );
+      $self->shmfile( $path =~ m{ \A ([ \:\-\.\/\\\w.]+) \z }mx ? $1 : q() );
       $self->shmfile or $self->throw( error => 'Path [_1] cannot untaint',
                                       args  => [ $self->shmfile ] );
    }
@@ -171,7 +171,7 @@ IPC::SRLock::Fcntl - Set/reset locks using fcntl
 
 =head1 Version
 
-0.8.$Revision: 200 $
+0.8.$Revision: 206 $
 
 =head1 Synopsis
 
