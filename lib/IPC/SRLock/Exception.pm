@@ -1,10 +1,10 @@
-# @(#)$Id: Exception.pm 206 2012-11-22 04:50:59Z pjf $
+# @(#)$Id: Exception.pm 207 2012-11-27 13:21:55Z pjf $
 
 package IPC::SRLock::Exception;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.8.%d', q$Rev: 206 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.8.%d', q$Rev: 207 $ =~ /\d+/gmx );
 
 use Exception::Class
    'IPC::SRLock::Exception::Base' => { fields => [qw(args out rv)] };
@@ -45,7 +45,8 @@ sub full_message {
    # Expand positional parameters of the form [_<n>]
    0 > index $text, '[_' and return $text;
 
-   my @args = @{ $self->args }; push @args, map { '[?]' } 0 .. 10;
+   my @args = map { defined $_ ? $_ : '[?]' } @{ $self->args },
+              map { '[?]' } 0 .. 9;
 
    $text =~ s{ \[ _ (\d+) \] }{$args[ $1 - 1 ]}gmx;
 
@@ -97,7 +98,7 @@ IPC::SRLock::Exception - Exception class
 
 =head1 Version
 
-0.8.$Revision: 206 $
+0.8.$Revision: 207 $
 
 =head1 Synopsis
 

@@ -1,10 +1,10 @@
-# @(#)$Id: Fcntl.pm 206 2012-11-22 04:50:59Z pjf $
+# @(#)$Id: Fcntl.pm 207 2012-11-27 13:21:55Z pjf $
 
 package IPC::SRLock::Fcntl;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.8.%d', q$Rev: 206 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.8.%d', q$Rev: 207 $ =~ /\d+/gmx );
 use parent qw(IPC::SRLock);
 
 use Data::Serializer;
@@ -17,6 +17,7 @@ use Try::Tiny;
 
 my %ATTRS = ( lockfile   => undef,
               mode       => oct q(0666),
+              pattern    => qr{ \A ([ :+./\-\\\w]+) \z }msx,
               serializer => undef,
               shmfile    => undef,
               tempdir    => File::Spec->tmpdir,
@@ -33,19 +34,15 @@ sub _init {
       $self->{ $_ } = $ATTRS{ $_ };
    }
 
-   unless ($self->lockfile) {
-      $path = catfile( $self->tempdir, $self->name.q(.lck) );
-      $self->lockfile( $path =~ m{ \A ([ \:\-\.\/\\\w.]+) \z }mx ? $1 : q() );
-      $self->lockfile or $self->throw( error => 'Path [_1] cannot untaint',
-                                       args  => [ $self->lockfile ] );
-   }
+   $path = $self->lockfile || catfile( $self->tempdir, $self->name.q(.lck) );
+   $self->lockfile( $path =~ $self->pattern ? $1 : q() );
+   $self->lockfile or $self->throw( error => 'Path [_1] cannot untaint',
+                                    args  => [ $path ] );
 
-   unless ($self->shmfile) {
-      $path = catfile( $self->tempdir, $self->name.q(.shm) );
-      $self->shmfile( $path =~ m{ \A ([ \:\-\.\/\\\w.]+) \z }mx ? $1 : q() );
-      $self->shmfile or $self->throw( error => 'Path [_1] cannot untaint',
-                                      args  => [ $self->shmfile ] );
-   }
+   $path = $self->shmfile  || catfile( $self->tempdir, $self->name.q(.shm) );
+   $self->shmfile( $path =~ $self->pattern ? $1 : q() );
+   $self->shmfile or $self->throw( error => 'Path [_1] cannot untaint',
+                                   args  => [ $path ] );
 
    $self->serializer( Data::Serializer->new( serializer => q(Storable) ) );
    return;
@@ -171,7 +168,7 @@ IPC::SRLock::Fcntl - Set/reset locks using fcntl
 
 =head1 Version
 
-0.8.$Revision: 206 $
+0.8.$Revision: 207 $
 
 =head1 Synopsis
 
