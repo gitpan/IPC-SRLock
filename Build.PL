@@ -1,9 +1,9 @@
-# @(#)$Id: Build.PL 204 2012-11-13 20:34:11Z pjf $
+# @(#)$Id: Build.PL 208 2012-12-04 20:11:15Z pjf $
 
 use strict;
 use warnings;
 use inc::Bob; # Module::Build subclass
-use version; our $VERSION = qv( sprintf '0.8.%d', q$Rev: 204 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.9.%d', q$Rev: 208 $ =~ /\d+/gmx );
 
 Bob->new( {
    module     => q(IPC::SRLock),

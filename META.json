@@ -62,23 +62,23 @@
    "provides" : {
       "IPC::SRLock" : {
          "file" : "lib/IPC/SRLock.pm",
-         "version" : "v0.8.207"
+         "version" : "v0.9.208"
       },
       "IPC::SRLock::Exception" : {
          "file" : "lib/IPC/SRLock/Exception.pm",
-         "version" : "v0.8.207"
+         "version" : "v0.9.208"
       },
       "IPC::SRLock::Fcntl" : {
          "file" : "lib/IPC/SRLock/Fcntl.pm",
-         "version" : "v0.8.207"
+         "version" : "v0.9.208"
       },
       "IPC::SRLock::Memcached" : {
          "file" : "lib/IPC/SRLock/Memcached.pm",
-         "version" : "v0.8.195"
+         "version" : "v0.9.208"
       },
       "IPC::SRLock::Sysv" : {
          "file" : "lib/IPC/SRLock/Sysv.pm",
-         "version" : "v0.8.195"
+         "version" : "v0.9.208"
       }
    },
    "release_status" : "stable",
@@ -91,5 +91,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.8.207"
+   "version" : "0.9.208"
 }

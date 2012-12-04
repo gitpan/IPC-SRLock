@@ -1,10 +1,10 @@
-# @(#)$Id: SRLock.pm 207 2012-11-27 13:21:55Z pjf $
+# @(#)$Id: SRLock.pm 208 2012-12-04 20:11:15Z pjf $
 
 package IPC::SRLock;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.8.%d', q$Rev: 207 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.9.%d', q$Rev: 208 $ =~ /\d+/gmx );
 use parent qw(Class::Accessor::Fast);
 
 use Class::MOP;
@@ -94,10 +94,11 @@ sub reset {
 sub set {
    my ($self, @rest) = @_; my $args = $self->_arg_list( @rest );
 
-   my $key = $args->{k} or $self->throw( 'No key specified' );
-   my $pid = $args->{p} || $self->pid or $self->throw( 'No pid specified' );
+   $args->{k}   = q().$args->{k} or $self->throw( 'No key specified' );
+   $args->{p} ||= $self->pid; $args->{p} or $self->throw( 'No pid specified' );
+   $args->{t} ||= $self->time_out;
 
-   return $self->_set( q().$key, $pid, $args->{t} || $self->time_out );
+   return $self->_set( $args );
 }
 
 sub throw {
@@ -185,7 +186,7 @@ IPC::SRLock - Set/reset locking semantics to single thread processes
 
 =head1 Version
 
-0.8.$Revision: 207 $
+0.9.$Revision: 208 $
 
 =head1 Synopsis
 
