@@ -1,7 +1,7 @@
 ---
 abstract: 'Set/reset locking semantics to single thread processes'
 author:
-  - 'Peter Flanigan, C<< <Support at RoxSoft.co.uk> >>'
+  - 'Peter Flanigan, C<< <pjfl@cpan.org> >>'
 build_requires:
   Exception::Class: 1.23
   List::Util: 1.19
@@ -10,7 +10,7 @@ configure_requires:
   Module::Build: 0.38
   version: 0.74
 dynamic_config: 1
-generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.112621'
+generated_by: 'Module::Build version 0.4004, CPAN::Meta::Converter version 2.120921'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -20,11 +20,12 @@ no_index:
   directory:
     - examples
     - inc
+    - share
     - t
 provides:
   IPC::SRLock:
     file: lib/IPC/SRLock.pm
-    version: v0.9.208
+    version: v0.9.210
   IPC::SRLock::Exception:
     file: lib/IPC/SRLock/Exception.pm
     version: v0.9.208
@@ -61,4 +62,4 @@ resources:
   bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=IPC-SRLock
   homepage: http://www.roxsoft.co.uk
   license: http://dev.perl.org/licenses/
-version: 0.9.208
+version: v0.9.210

@@ -1,10 +1,10 @@
 {
    "abstract" : "Set/reset locking semantics to single thread processes",
    "author" : [
-      "Peter Flanigan, C<< <Support at RoxSoft.co.uk> >>"
+      "Peter Flanigan, C<< <pjfl@cpan.org> >>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.38, CPAN::Meta::Converter version 2.112621",
+   "generated_by" : "Module::Build version 0.4004, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -17,6 +17,7 @@
       "directory" : [
          "examples",
          "inc",
+         "share",
          "t"
       ]
    },
@@ -62,7 +63,7 @@
    "provides" : {
       "IPC::SRLock" : {
          "file" : "lib/IPC/SRLock.pm",
-         "version" : "v0.9.208"
+         "version" : "v0.9.210"
       },
       "IPC::SRLock::Exception" : {
          "file" : "lib/IPC/SRLock/Exception.pm",
@@ -91,5 +92,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.9.208"
+   "version" : "v0.9.210"
 }
