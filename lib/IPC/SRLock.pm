@@ -1,10 +1,10 @@
-# @(#)$Id: SRLock.pm 210 2013-04-15 20:24:44Z pjf $
+# @(#)$Id: SRLock.pm 212 2013-04-16 17:44:56Z pjf $
 
 package IPC::SRLock;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.9.%d', q$Rev: 210 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.9.%d', q$Rev: 212 $ =~ /\d+/gmx );
 use parent qw(Class::Accessor::Fast);
 
 use Class::MOP;
@@ -186,7 +186,7 @@ IPC::SRLock - Set/reset locking semantics to single thread processes
 
 =head1 Version
 
-0.9.$Revision: 210 $
+0.9.$Revision: 212 $
 
 =head1 Synopsis
 
@@ -392,7 +392,7 @@ Peter Flanigan, C<< <pjfl@cpan.org> >>
 
 =head1 License and Copyright
 
-Copyright (c) 2008-2012 Peter Flanigan. All rights reserved
+Copyright (c) 2013 Peter Flanigan. All rights reserved
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself. See L<perlartistic>
@@ -407,4 +407,3 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE
 # mode: perl
 # tab-width: 3
 # End:
-

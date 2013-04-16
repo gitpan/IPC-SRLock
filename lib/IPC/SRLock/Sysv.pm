@@ -1,10 +1,10 @@
-# @(#)$Id: Sysv.pm 208 2012-12-04 20:11:15Z pjf $
+# @(#)$Id: Sysv.pm 212 2013-04-16 17:44:56Z pjf $
 
 package IPC::SRLock::Sysv;
 
 use strict;
 use warnings;
-use version; our $VERSION = qv( sprintf '0.9.%d', q$Rev: 208 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.9.%d', q$Rev: 212 $ =~ /\d+/gmx );
 use parent qw(IPC::SRLock);
 
 use English        qw(-no_match_vars);
@@ -31,7 +31,7 @@ sub _init {
                                                '-create' => 1,
                                                '-mode'   => oct $self->mode,
                                                '-size'   => $self->size ) ) }
-   catch { $self->throw( "$ERRNO: $_" ) };
+   catch { $self->throw( "$_: $OS_ERROR" ) };
 
    return;
 }
@@ -43,7 +43,7 @@ sub _fetch_share_data {
       or $self->throw( 'Failed to set semaphore' );
 
    try   { $data = $self->_share->fetch }
-   catch { $self->throw( "$ERRNO: $_" ) };
+   catch { $self->throw( "$_: $OS_ERROR" ) };
 
    not $for_update and $self->_unlock_share;
 
@@ -70,7 +70,7 @@ sub _reset {
 
    if ($found = delete $hash->{ $key }) {
       try   { $self->_share->store( nfreeze( $hash ) ) }
-      catch { $self->throw( "$ERRNO: $_" ) };
+      catch { $self->throw( "$_: $OS_ERROR" ) };
    }
 
    $self->_unlock_share;
@@ -132,7 +132,7 @@ sub _set_lock {
    $hash->{ $key } = { pid => $pid, stime => $now, timeout => $timeout };
 
    try   { $self->_share->store( nfreeze( $hash ) ) }
-   catch { $self->throw( "$ERRNO: $_" ) };
+   catch { $self->throw( "$_: $OS_ERROR" ) };
 
    return 1;
 }
@@ -157,7 +157,7 @@ IPC::SRLock::Sysv - Set/reset locks using System V IPC
 
 =head1 Version
 
-0.9.$Revision: 208 $
+0.9.$Revision: 212 $
 
 =head1 Synopsis
 
@@ -245,7 +245,7 @@ Peter Flanigan, C<< <Support at RoxSoft.co.uk> >>
 
 =head1 License and Copyright
 
-Copyright (c) 2012 Peter Flanigan. All rights reserved
+Copyright (c) 2013 Peter Flanigan. All rights reserved
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself. See L<perlartistic>
