@@ -1,20 +1,19 @@
-# @(#)$Id: Build.PL 212 2013-04-16 17:44:56Z pjf $
+# @(#)$Ident: Build.PL 2013-05-05 11:04 pjf ;
 
 use strict;
 use warnings;
 use inc::Bob; # Module::Build subclass
-use version; our $VERSION = qv( sprintf '0.9.%d', q$Rev: 212 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.10.%d', q$Rev: 2 $ =~ /\d+/gmx );
 
 Bob->new( {
-   module     => q(IPC::SRLock),
-   home_page  => q(http://www.roxsoft.co.uk),
-   requires   => {
+   module    => q(IPC::SRLock),
+   home_page => q(http://www.roxsoft.co.uk),
+   requires  => {
       'perl'                  => 5.010,
       'parent'                => 0.221,
       'version'               => 0.74,
       'Class::Accessor::Fast' => 0.31,
       'Class::Null'           => 1.09,
-      'Data::Serializer'      => 0.46,
       'Date::Format'          => 2.22,
       'Exception::Class'      => 1.23,
       'IO::AtomicFile'        => 2.110,
@@ -22,7 +21,7 @@ Bob->new( {
       'IPC::ShareLite'        => 0.17,
       'List::Util'            => 1.19,
       'Moose'                 => 2.0402,
-      'Storable'              => 2.15,
+      'Storable'              => 2.39,
       'Time::Elapsed'         => 0.10,
       'Time::HiRes'           => 1.9711,
       'Try::Tiny'             => 0.06, },
@@ -35,8 +34,8 @@ Bob->new( {
 } )->create_build_script; # Goal!
 
 # Local Variables:
-# eval: (load-project-state "ipc-srlock")
 # mode: perl
+# eval: (load-project-state "ipc-srlock")
 # tab-title: SRLock
 # tab-width: 3
 # End:

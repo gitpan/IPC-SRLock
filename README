@@ -2,7 +2,7 @@ Name
     IPC::SRLock - Set/reset locking semantics to single thread processes
 
 Version
-    This documents version 0.9.$Revision: 215 $ of IPC::SRLock
+    This documents version v0.10.$Rev: 2 $ of IPC::SRLock
 
 Synopsis
        use IPC::SRLock;
@@ -32,7 +32,7 @@ Configuration and Environment
        turned on. Defaults to Class::Null
 
     "name"
-       Used as the lock file names. Defaults to *ipc_srlock*
+       Used as the lock file names. Defaults to "ipc_srlock"
 
     "nap_time"
        How long to wait between polls of the lock table. Defaults to 0.5
@@ -50,7 +50,7 @@ Configuration and Environment
        300
 
     "type"
-       Determines which factory subclass is loaded. Defaults to *fcntl*
+       Determines which factory subclass is loaded. Defaults to "fcntl"
 
 Subroutines/Methods
   new
@@ -74,19 +74,22 @@ Subroutines/Methods
   reset
        $lock_obj->reset( k => q(some_resource_key) );
 
-    Resets the lock referenced by the k attribute.
+    Resets the lock referenced by the "k" attribute.
 
   set
        $lock_obj->set( k => q(some_resource_key) );
 
     Sets the specified lock. Attributes are:
 
-    k  Unique key to identify the lock. Mandatory no default
+    "k"
+       Unique key to identify the lock. Mandatory no default
 
-    p  Explicitly set the process id associated with the lock. Defaults to
+    "p"
+       Explicitly set the process id associated with the lock. Defaults to
        the current process id
 
-    t  Set the time to live for this lock. Defaults to five minutes. Setting
+    "t"
+       Set the time to live for this lock. Defaults to five minutes. Setting
        it to zero makes the lock last indefinitely
 
   throw
@@ -140,9 +143,9 @@ Incompatibilities
     The "Sysv" subclass will not work on "MSWin32" and "cygwin" platforms
 
 Bugs and Limitations
-    Testing of the memcached subclass is skipped on all platforms as it
+    Testing of the "memcached" subclass is skipped on all platforms as it
     requires "memcached" to be listening on the localhost's default
-    memcached port *localhost:11211*
+    memcached port "localhost:11211"
 
     There are no known bugs in this module. Please report problems to the
     address below. Patches are welcome
