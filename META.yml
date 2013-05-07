@@ -24,10 +24,10 @@ no_index:
 provides:
   IPC::SRLock:
     file: lib/IPC/SRLock.pm
-    version: v0.11.4
+    version: v0.11.5
   IPC::SRLock::Base:
     file: lib/IPC/SRLock/Base.pm
-    version: v0.11.0
+    version: v0.11.5
   IPC::SRLock::Exception:
     file: lib/IPC/SRLock/Exception.pm
     version: v0.11.0
@@ -62,4 +62,4 @@ resources:
   bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=IPC-SRLock
   homepage: http://www.roxsoft.co.uk
   license: http://dev.perl.org/licenses/
-version: v0.11.4
+version: v0.11.5
