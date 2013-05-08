@@ -1,6 +1,8 @@
 Revision history for IPC::SRLock
 
-0.11.6    2013-05-07 13:49:11
+0.11.8    2013-05-08 15:51:19
+          - Added out attr to Exception class
+          - Exception class allows us to apply roles
           - Loosed type constraint on umask
           - Loosed type constraint on patience
           - Bumped version on MooseX::Types::Common

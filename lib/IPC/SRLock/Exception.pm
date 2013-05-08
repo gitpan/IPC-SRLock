@@ -1,15 +1,20 @@
-# @(#)$Ident: Exception.pm 2013-05-06 13:32 pjf ;
+# @(#)$Ident: Exception.pm 2013-05-08 06:57 pjf ;
 
 package IPC::SRLock::Exception;
 
 use namespace::autoclean;
-use version; our $VERSION = qv( sprintf '0.11.%d', q$Rev: 0 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.11.%d', q$Rev: 8 $ =~ /\d+/gmx );
 
 use Moose;
+use MooseX::Types::Moose qw(Str);
 
 extends q(File::DataClass::Exception);
 
+File::DataClass::Exception->add_roles( 'ErrorLeader' );
+
 has '+class' => default => __PACKAGE__;
+
+has 'out'    => is => 'ro', isa => Str, default => q();
 
 1;
 
@@ -23,7 +28,7 @@ IPC::SRLock::Exception - Exception class
 
 =head1 Version
 
-This documents version v0.11.$Rev: 0 $
+This documents version v0.11.$Rev: 8 $
 
 =head1 Synopsis
 
