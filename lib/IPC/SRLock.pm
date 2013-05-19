@@ -4,7 +4,7 @@ package IPC::SRLock;
 
 use 5.01;
 use namespace::autoclean;
-use version; our $VERSION = qv( sprintf '0.11.%d', q$Rev: 12 $ =~ /\d+/gmx );
+use version; our $VERSION = qv( sprintf '0.11.%d', q$Rev: 13 $ =~ /\d+/gmx );
 
 use Moose;
 use Moose::Util::TypeConstraints;
@@ -70,7 +70,7 @@ IPC::SRLock - Set/reset locking semantics to single thread processes
 
 =head1 Version
 
-This documents version v0.11.$Rev: 12 $ of L<IPC::SRLock>
+This documents version v0.11.$Rev: 13 $ of L<IPC::SRLock>
 
 =head1 Synopsis
 
