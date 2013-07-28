@@ -2,7 +2,7 @@ Name
     IPC::SRLock - Set/reset locking semantics to single thread processes
 
 Version
-    This documents version v0.11.$Rev: 13 $ of IPC::SRLock
+    This documents version v0.12.$Rev: 2 $ of IPC::SRLock
 
 Synopsis
        use IPC::SRLock;
@@ -32,6 +32,9 @@ Configuration and Environment
        be; "fcntl", "memcached", or "sysv"
 
 Subroutines/Methods
+  BUILDARGS
+    Extracts the "type" attribute from those passed to the factory subclass
+
   BUILD
     Called after an instance is created this subroutine triggers the lazy
     evaluation of the concrete subclass
@@ -73,10 +76,9 @@ Diagnostics
     record at the debug level
 
 Dependencies
-    Moose
-    Moose::Util::TypeConstraints
-    MooseX::Types::LoadableClass
-    MooseX::Types::Moose
+    Moo
+    Type::Tiny
+    Unexpected
 
 Incompatibilities
     The "sysv" subclass type will not work on "MSWin32" and "cygwin"
