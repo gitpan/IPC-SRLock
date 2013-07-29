@@ -57,7 +57,7 @@
    "provides" : {
       "IPC::SRLock" : {
          "file" : "lib/IPC/SRLock.pm",
-         "version" : "v0.12.2"
+         "version" : "v0.12.3"
       },
       "IPC::SRLock::Base" : {
          "file" : "lib/IPC/SRLock/Base.pm",
@@ -90,5 +90,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "v0.12.2"
+   "version" : "v0.12.3"
 }
