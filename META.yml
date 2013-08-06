@@ -25,22 +25,22 @@ no_index:
 provides:
   IPC::SRLock:
     file: lib/IPC/SRLock.pm
-    version: v0.12.7
+    version: v0.13.1
   IPC::SRLock::Base:
     file: lib/IPC/SRLock/Base.pm
-    version: v0.12.1
+    version: v0.13.1
   IPC::SRLock::Exception:
     file: lib/IPC/SRLock/Exception.pm
-    version: v0.12.1
+    version: v0.13.1
   IPC::SRLock::Fcntl:
     file: lib/IPC/SRLock/Fcntl.pm
-    version: v0.12.1
+    version: v0.13.1
   IPC::SRLock::Memcached:
     file: lib/IPC/SRLock/Memcached.pm
-    version: v0.12.1
+    version: v0.13.1
   IPC::SRLock::Sysv:
     file: lib/IPC/SRLock/Sysv.pm
-    version: v0.12.1
+    version: v0.13.1
 recommends:
   Cache::Memcached: 1.24
 requires:
@@ -48,15 +48,15 @@ requires:
   Date::Format: 2.24
   File::DataClass: v0.22.0
   IPC::ShareLite: 0.17
-  Moo: 1.002
+  Moo: 1.003
   Time::Elapsed: 0.29
   Try::Tiny: 0.09
   Type::Tiny: 0.012
-  Unexpected: v0.4.0
+  Unexpected: v0.6.0
   namespace::sweep: 0.006
   perl: 5.01
 resources:
   bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=IPC-SRLock
   homepage: http://www.roxsoft.co.uk
   license: http://dev.perl.org/licenses/
-version: v0.12.7
+version: v0.13.1
