@@ -50,14 +50,14 @@
             "Type::Tiny" : "0.012",
             "Unexpected" : "v0.6.0",
             "namespace::sweep" : "0.006",
-            "perl" : "5.01"
+            "perl" : "5.010001"
          }
       }
    },
    "provides" : {
       "IPC::SRLock" : {
          "file" : "lib/IPC/SRLock.pm",
-         "version" : "v0.13.1"
+         "version" : "v0.13.2"
       },
       "IPC::SRLock::Base" : {
          "file" : "lib/IPC/SRLock/Base.pm",
@@ -90,5 +90,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "v0.13.1"
+   "version" : "v0.13.2"
 }
