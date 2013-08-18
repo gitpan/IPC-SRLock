@@ -1,4 +1,4 @@
-# @(#)$Ident: Build.PL 2013-08-14 09:38 pjf ;
+# @(#)$Ident: DZ_Build.PL 2013-08-15 13:04 pjf ;
 
 use strict;
 use warnings;
@@ -7,16 +7,19 @@ use Module::Build;
 
 sub whimper { print {*STDOUT} $_[ 0 ]."\n"; exit 0 }
 
-$] >= 5.010001 or whimper 'Minimum required Perl version is 5.010001';
+my $perl_ver = 5.010001;
+my $name     = 'IPC-SRLock'; $name =~ s{ - }{::}gmx;
 
-my $code = do { local $/; <DATA> };
+$] >= $perl_ver or $ENV{PERL5_CPANPLUS_IS_VERSION}
+   or whimper "Minimum required Perl version is ${perl_ver}";
 
-Module::Build->subclass( code => $code )->new(
-  'module_name' => 'IPC::SRLock',
-  'notes'       => { min_perl_version => 5.010001 },
+Module::Build->subclass( code => do { local $/; <DATA> } )->new(
+  'module_name' => $name,
+  'notes'       => { min_perl_version => $perl_ver },
   'build_requires' => {
     'File::DataClass' => 'v0.22.0',
     'Module::Build' => '0.4004',
+    'Test::Requires' => '0.06',
     'version' => '0.88'
   },
   'configure_requires' => {
@@ -36,7 +39,8 @@ Module::Build->subclass( code => $code )->new(
     'Try::Tiny' => '0.09',
     'Type::Tiny' => '0.012',
     'Unexpected' => 'v0.6.0',
-    'namespace::sweep' => '0.006'
+    'namespace::sweep' => '0.006',
+    'perl' => '5.010001'
   },
 
 )->create_build_script;
