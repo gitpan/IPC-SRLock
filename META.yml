@@ -26,38 +26,38 @@ no_index:
 provides:
   IPC::SRLock:
     file: lib/IPC/SRLock.pm
-    version: v0.14.3
+    version: v0.16.1
   IPC::SRLock::Base:
     file: lib/IPC/SRLock/Base.pm
-    version: v0.14.1
+    version: v0.16.1
   IPC::SRLock::Exception:
     file: lib/IPC/SRLock/Exception.pm
-    version: v0.14.1
+    version: v0.16.1
   IPC::SRLock::Fcntl:
     file: lib/IPC/SRLock/Fcntl.pm
-    version: v0.14.1
+    version: v0.16.1
   IPC::SRLock::Memcached:
     file: lib/IPC/SRLock/Memcached.pm
-    version: v0.14.1
+    version: v0.16.1
   IPC::SRLock::Sysv:
     file: lib/IPC/SRLock/Sysv.pm
-    version: v0.14.1
+    version: v0.16.1
 recommends:
   Cache::Memcached: 1.24
 requires:
   Class::Null: 1.09
   Date::Format: 2.24
-  File::DataClass: v0.22.0
+  File::DataClass: v0.25.0
   IPC::ShareLite: 0.17
   Moo: 1.003
   Time::Elapsed: 0.29
   Try::Tiny: 0.09
   Type::Tiny: 0.012
-  Unexpected: v0.6.0
+  Unexpected: v0.12.0
   namespace::sweep: 0.006
   perl: 5.010001
 resources:
   bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=IPC-SRLock
   homepage: https://metacpan.org/author/PJFL
   license: http://dev.perl.org/licenses/
-version: 0.14.3
+version: 0.16.1
