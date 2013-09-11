@@ -8,7 +8,6 @@ README
 SIGNATURE
 lib/IPC/SRLock.pm
 lib/IPC/SRLock/Base.pm
-lib/IPC/SRLock/Exception.pm
 lib/IPC/SRLock/Fcntl.pm
 lib/IPC/SRLock/Memcached.pm
 lib/IPC/SRLock/Sysv.pm

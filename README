@@ -2,7 +2,7 @@ Name
     IPC::SRLock - Set/reset locking semantics to single thread processes
 
 Version
-    This documents version v0.16.$Rev: 1 $ of IPC::SRLock
+    This documents version v0.17.$Rev: 1 $ of IPC::SRLock
 
 Synopsis
        use IPC::SRLock;
@@ -81,9 +81,9 @@ Diagnostics
     record at the debug level
 
 Dependencies
+    File::DataClass
     Moo
     Type::Tiny
-    Unexpected
 
 Incompatibilities
     The "sysv" subclass type will not work on "MSWin32" and "cygwin"
