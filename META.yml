@@ -26,19 +26,19 @@ no_index:
 provides:
   IPC::SRLock:
     file: lib/IPC/SRLock.pm
-    version: v0.18.1
+    version: v0.19.1
   IPC::SRLock::Base:
     file: lib/IPC/SRLock/Base.pm
-    version: v0.18.1
+    version: v0.19.1
   IPC::SRLock::Fcntl:
     file: lib/IPC/SRLock/Fcntl.pm
-    version: v0.18.1
+    version: v0.19.1
   IPC::SRLock::Memcached:
     file: lib/IPC/SRLock/Memcached.pm
-    version: v0.18.1
+    version: v0.19.1
   IPC::SRLock::Sysv:
     file: lib/IPC/SRLock/Sysv.pm
-    version: v0.18.1
+    version: v0.19.1
 recommends:
   Cache::Memcached: 1.24
 requires:
@@ -56,4 +56,4 @@ resources:
   bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=IPC-SRLock
   homepage: https://metacpan.org/author/PJFL
   license: http://dev.perl.org/licenses/
-version: 0.18.1
+version: 0.19.1
