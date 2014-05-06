@@ -1,21 +1,21 @@
 ---
 abstract: 'Set/reset locking semantics to single thread processes'
 author:
-  - 'Peter Flanigan <pjfl@cpan.org>'
+  - 'Peter Flanigan, C<< <pjfl@cpan.org> >>'
 build_requires:
-  File::DataClass: v0.27.0
-  Module::Build: 0.4202
-  Test::Requires: 0.06
-  version: 0.88
+  File::DataClass: v0.35.0
+  Module::Build: '0.4202'
+  Test::Requires: '0.06'
+  version: '0.88'
 configure_requires:
-  Module::Build: 0.4202
-  version: 0.88
+  Module::Build: '0.4202'
+  version: '0.88'
 dynamic_config: 1
-generated_by: 'Dist::Zilla version 4.300033, CPAN::Meta::Converter version 2.120921'
+generated_by: 'Dist::Zilla version 5.006, CPAN::Meta::Converter version 2.120921'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
-  version: 1.4
+  version: '1.4'
 name: IPC-SRLock
 no_index:
   directory:
@@ -26,34 +26,34 @@ no_index:
 provides:
   IPC::SRLock:
     file: lib/IPC/SRLock.pm
-    version: v0.21.1
+    version: v0.22.1
   IPC::SRLock::Base:
     file: lib/IPC/SRLock/Base.pm
-    version: v0.21.1
+    version: v0.22.1
   IPC::SRLock::Fcntl:
     file: lib/IPC/SRLock/Fcntl.pm
-    version: v0.21.1
+    version: v0.22.1
   IPC::SRLock::Memcached:
     file: lib/IPC/SRLock/Memcached.pm
-    version: v0.21.1
+    version: v0.22.1
   IPC::SRLock::Sysv:
     file: lib/IPC/SRLock/Sysv.pm
-    version: v0.21.1
+    version: v0.22.1
 recommends:
-  Cache::Memcached: 1.24
+  Cache::Memcached: '1.24'
 requires:
-  Class::Null: 1.09
-  Date::Format: 2.24
-  File::DataClass: v0.27.0
-  IPC::ShareLite: 0.17
-  Moo: 1.003
-  Time::Elapsed: 0.29
-  Try::Tiny: 0.18
-  Type::Tiny: 0.030
-  namespace::sweep: 0.006
-  perl: 5.010001
+  Class::Null: '1.09'
+  Date::Format: '2.24'
+  File::DataClass: v0.35.0
+  IPC::ShareLite: '0.17'
+  Moo: '1.004002'
+  Time::Elapsed: '0.29'
+  Try::Tiny: '0.18'
+  Type::Tiny: '0.030'
+  namespace::sweep: '0.006'
+  perl: '5.010001'
 resources:
   bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=IPC-SRLock
   homepage: https://metacpan.org/author/PJFL
   license: http://dev.perl.org/licenses/
-version: 0.21.1
+version: 0.22.1
