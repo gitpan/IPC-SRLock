@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.66.
+signed via the Module::Signature module, version 0.73.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -14,32 +14,32 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 357405e7bc361b5b19f249beeba2fff352c535b4 Build.PL
-SHA1 538aca6ad88c0b32d5f2d222b41782229c039f57 Changes
-SHA1 2b3ccb88f716f614f8af721a1c69dba0bcdbbb32 LICENSE
+SHA1 61ef379aa18615230727532757befbe4eb1f9ee9 Build.PL
+SHA1 ede955ffd248ce7f379c895168887f74423beb10 Changes
+SHA1 ef384398168a024221a4af017109f5873b388908 LICENSE
 SHA1 0ec1da383bd9b06476d9b07fe8d0b08fa716663a MANIFEST
-SHA1 9b4416986810b8212448eff83dc5e7d8b7158371 META.json
-SHA1 c90c8eb2fc31975723452379c099cd1ab255549f META.yml
-SHA1 02f12d5c344db4c188afc568cc4e43a124a1ec2e README
-SHA1 4d8cd1d82696871b2122ce03434e3bd50f917a48 lib/IPC/SRLock.pm
-SHA1 85145280dc0c5cb71ae6019ec98c756e8791faef lib/IPC/SRLock/Base.pm
-SHA1 356632795ed71d160f349e2c482315af81e113fb lib/IPC/SRLock/Fcntl.pm
-SHA1 fa76f22f0577d9c78705185e6f2bcfd5108726e2 lib/IPC/SRLock/Memcached.pm
-SHA1 29eb2023090293ab9b3f1832f98170076185bafa lib/IPC/SRLock/Sysv.pm
+SHA1 6c26848dc35395958f00b2d9784114226634f3ec META.json
+SHA1 348ad6e3b0f43fd33a437c4f7d718e5b8ac1ecb2 META.yml
+SHA1 6bc4b6bc28af105f345204f3070b251df8a1336f README
+SHA1 51c793da15be22968a86696b321cf5f59640fe3c lib/IPC/SRLock.pm
+SHA1 a3f5305219696c42c4b6f91be240cd177e9a63c4 lib/IPC/SRLock/Base.pm
+SHA1 ad4cbbcbc6f58f3365e2fba706911f8cda615f5e lib/IPC/SRLock/Fcntl.pm
+SHA1 c80cc7d5a4f88eb4c4d3e9127d4e55f7deecae9f lib/IPC/SRLock/Memcached.pm
+SHA1 8cb79ad05206750a121cf6fc37c9ca9eca5d8d99 lib/IPC/SRLock/Sysv.pm
 SHA1 a412ad8e1dfe0cc3a6b1f93b68d41bd89a1972e9 t/01always_pass.t
 SHA1 427b1a5820b3d6bc52044b99c999e458eba7d6dc t/02pod.t
 SHA1 905a84ed4a01bba172b682620964560f04ff93d2 t/03podcoverage.t
 SHA1 c1c29d14c961c30f0ea1ff84dd3b6acb7f4d3e81 t/05kwalitee.t
-SHA1 8dc3f0dafd40a2f0343cb44d27ee4f638a10dc59 t/07podspelling.t
+SHA1 e924b46272cd857d1bb46d4defaf68e5345210dc t/07podspelling.t
 SHA1 b12d85a86cee04349980d702055dbfb56f3d9d1f t/10test_script.t
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.12 (GNU/Linux)
 
-iQEcBAEBAgAGBQJTaMZ1AAoJEK492j4Im1Bp40UH/2WZUbiFVLmvX9ycC2Bd8Ec1
-vF9RndlvLvdIsitYAfz0WL1hvdCG+dKC/nOPt1jj69xvjtm/sPyO1tUBtLY6nxrp
-Haxb0z6VOjxmLDcke9MUoJyzoYhudZLVBgwuGwJIujdOGSgUeUlU+Fy5oFjuCFn0
-Z+sm33ok/KKW8LsEhCR5vkiwEbiEVnuQ93le11xaeKWUDvvFzdpNaMMz/zoyK5aL
-MBSHludxGEE1O37BAEyzpjCGTnTNbYMpNeostuYk5jkYl4XNJAbAJvfEGMG6O/z4
-zP5IoMqwkekaJaNQRMqiwrAAGl9MYRrnPEcivjH2S+gIg7ms734JyPKWYPsdMBk=
-=rw33
+iQEcBAEBAgAGBQJUFvzsAAoJEK492j4Im1BpRnYH/2cie20rsIkh1oHEtAbPIrz8
+aWEiE5Xzu7JZdCDX43wo6FN7D15R+JRSe9VYJev16eXsQkPFTWIhNpauXK7gIvAW
+Y4gX3Ih57KKQKzlgdfAHleZm61+xYPpEbBGzIw0jyEfNSfkwDTktuOh8C7ctpO5D
+qT9nB4Abn/NdzTU73efMnAE2pZrZpDq+9SFin0d0VZxe3AzqoJquccNSxSLfGB5h
+f6nPSyAhqStKoKm3X2NOpM651kq6WxEMINMoOC39a/K+rN/dOz2lSvD3ZNkLP7PO
+Et531Vv/REXig2nQYNW32Q+HX6KJBaBWhzfQBXQnINuUl9zBI3emUXFB23LsYKw=
+=8BUX
 -----END PGP SIGNATURE-----
