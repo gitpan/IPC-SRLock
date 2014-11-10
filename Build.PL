@@ -11,7 +11,7 @@ my $perl_ver = 5.010001;
 my $name     = 'IPC-SRLock'; $name =~ s{ - }{::}gmx;
 my $prereqs  = {
   'build_requires' => {
-    'File::DataClass' => 'v0.48.0',
+    'File::DataClass' => 'v0.52.0',
     'Module::Build' => '0.4202',
     'Test::Requires' => '0.06',
     'version' => '0.88'
@@ -26,7 +26,7 @@ my $prereqs  = {
   'requires' => {
     'Class::Null' => '1.09',
     'Date::Format' => '2.24',
-    'File::DataClass' => 'v0.48.0',
+    'File::DataClass' => 'v0.52.0',
     'IPC::ShareLite' => '0.17',
     'Moo' => '1.006000',
     'Time::Elapsed' => '0.31',

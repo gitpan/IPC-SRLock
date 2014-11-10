@@ -18,22 +18,21 @@ has 'servers'  => is => 'ro', isa => ArrayRef,
 has 'shmfile'  => is => 'ro', isa => NonEmptySimpleStr, default => '_shmfile';
 
 # Private attributes
-has '_memd'    => is => 'lazy', isa => Object,
-   init_arg    => undef,     reader => 'memd';
+has '_memd'    => is => 'lazy', isa => Object, builder => sub {
+   Cache::Memcached->new( debug     => $_[ 0 ]->debug,
+                          namespace => $_[ 0 ]->name,
+                          servers   => $_[ 0 ]->servers ) },
+   init_arg    => undef, reader => 'memd';
 
 # Private methods
-sub _build_memd {
-   return Cache::Memcached->new( debug     => $_[ 0 ]->debug,
-                                 namespace => $_[ 0 ]->name,
-                                 servers   => $_[ 0 ]->servers );
-}
-
 sub _list {
    my $self = shift; my $list = []; my $start = time;
 
    while (1) {
       if ($self->memd->add( $self->lockfile, 1, $self->patience + 30 )) {
          my $recs = $self->memd->get( $self->shmfile ) || {};
+
+         $self->memd->delete( $self->lockfile );
 
          for my $key (sort keys %{ $recs }) {
             my @fields = split m{ , }mx, $recs->{ $key };
@@ -44,7 +43,6 @@ sub _list {
                                timeout => $fields[ 2 ] };
          }
 
-         $self->memd->delete( $self->lockfile );
          return $list;
       }
 
@@ -64,8 +62,7 @@ sub _reset {
          delete $recs->{ $key } and $found = 1;
          $found and $self->memd->set( $self->shmfile, $recs );
          $self->memd->delete( $self->lockfile );
-         $found or $self->throw( error => 'Lock [_1] not set',
-                                 args  => [ $key ] );
+         $found or $self->throw( 'Lock [_1] not set', args => [ $key ] );
          return 1;
       }
 
@@ -93,10 +90,8 @@ sub _set {
                $recs->{ $key } = "${pid},${now},${timeout}";
                $self->memd->set( $self->shmfile, $recs );
 
-               my $text = $self->timeout_error( $key,
-                                                $fields[ 0 ],
-                                                $fields[ 1 ],
-                                                $fields[ 2 ] );
+               my $text = $self->timeout_error
+                  ( $key, $fields[ 0 ], $fields[ 1 ], $fields[ 2 ] );
 
                $self->log->error( $text ); $lock_set = 1;
             }
@@ -110,7 +105,7 @@ sub _set {
          $self->memd->delete( $self->lockfile );
 
          if ($lock_set) {
-            $self->debug and $self->log->debug( "Lock ${key} set by ${pid}\n" );
+            $self->log->debug( "Lock ${key} set by ${pid}" );
             return 1;
          }
          elsif ($args->{async}) { return 0 }
@@ -126,7 +121,7 @@ sub _sleep_or_throw {
    my ($self, $start, $now, $key) = @_;
 
    $self->patience and $now > $start + $self->patience
-      and $self->throw( error => 'Lock [_1] timed out', args => [ $key ] );
+      and $self->throw( 'Lock [_1] timed out', args => [ $key ] );
    usleep( 1_000_000 * $self->nap_time );
    return;
 }
@@ -227,7 +222,7 @@ Peter Flanigan, C<< <pjfl@cpan.org> >>
 
 =head1 License and Copyright
 
-Copyright (c) 2013 Peter Flanigan. All rights reserved
+Copyright (c) 2014 Peter Flanigan. All rights reserved
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself. See L<perlartistic>
